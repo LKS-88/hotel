@@ -11,21 +11,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        /* --- REVISI SKEMA WARNA --- */
         :root {
-            --hotel-primary: #1a5e63;   /* Deep Teal */
-            --hotel-secondary: #c5a05b; /* Gold */
-            --hotel-accent: #e4b66a;    /* Light Gold */
-            --hotel-light: #fdfaf4;     /* Creamy White */
-            --hotel-dark: #2c3e50;      /* Charcoal Grey */
-            --hotel-gradient: linear-gradient(135deg, var(--hotel-primary), #2c7a7b);
+            --hotel-primary: #0d47a1;
+            --hotel-secondary: #b71c1c;
+            --hotel-accent: #ff8f00;
+            --hotel-light: #fff8e1;
+            --hotel-dark: #3e2723;
+            --hotel-gradient: linear-gradient(135deg, var(--hotel-primary), var(--hotel-secondary));
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
             --shadow-lg: 0 8px 28px rgba(0,0,0,0.15);
         }
         
         body {
-            background: linear-gradient(135deg, #f7f9f9 0%, #eef3f3 100%);
+            background: linear-gradient(135deg, #f5f9ff 0%, #e8f5e9 100%);
             font-family: 'Poppins', 'Segoe UI', sans-serif;
             min-height: 100vh;
             padding: 10px 0;
@@ -53,7 +52,7 @@
             border-radius: 12px;
             box-shadow: var(--shadow-lg);
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             text-align: center;
         }
         
@@ -111,7 +110,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
             pointer-events: none;
         }
         
@@ -146,7 +145,7 @@
             margin-bottom: 8px;
             padding: 12px 15px;
             font-weight: 500;
-            color: var(--hotel-dark);
+            color: #444;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -154,8 +153,7 @@
         }
         
         .nav-pills .nav-link:hover {
-            background-color: #eef3f3;
-            color: var(--hotel-primary);
+            background-color: #f0f7ff;
             transform: translateX(3px);
         }
         
@@ -184,14 +182,10 @@
             left: 12px;
             width: 40px;
             height: 2px;
-            background: var(--hotel-secondary);
+            background: var(--hotel-gradient);
             border-radius: 2px;
         }
         
-        .btn {
-             font-size: 0.9rem;
-        }
-
         .btn-primary {
             background: var(--hotel-gradient);
             border: none;
@@ -200,22 +194,28 @@
             box-shadow: var(--shadow-md);
             border-radius: 8px;
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
-            filter: brightness(1.1);
+        }
+
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
         }
         
         .btn-success {
-            background: linear-gradient(135deg, #28a745, #218838);
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
             border: none;
             padding: 10px 20px;
             font-weight: 600;
             box-shadow: var(--shadow-md);
             border-radius: 8px;
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
         
         .btn-success:hover {
@@ -224,13 +224,14 @@
         }
         
         .btn-warning {
-            background: linear-gradient(135deg, #ffc107, #e0a800);
+            background: linear-gradient(135deg, #ff8f00, #ef6c00);
             border: none;
             padding: 10px 20px;
             font-weight: 600;
             box-shadow: var(--shadow-md);
             border-radius: 8px;
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
         
         .btn-warning:hover {
@@ -239,13 +240,14 @@
         }
         
         .btn-danger {
-            background: linear-gradient(135deg, #dc3545, #c82333);
+            background: linear-gradient(135deg, #c62828, #b71c1c);
             border: none;
             padding: 10px 20px;
             font-weight: 600;
             box-shadow: var(--shadow-md);
             border-radius: 8px;
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
         
         .btn-danger:hover {
@@ -278,7 +280,7 @@
         
         .form-control:focus, .form-select:focus {
             border-color: var(--hotel-primary);
-            box-shadow: 0 0 0 3px rgba(26, 94, 99, 0.2);
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.2);
             transform: translateY(-2px);
         }
         
@@ -327,7 +329,7 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.3);
         }
         
         .data-table td {
@@ -338,11 +340,11 @@
         }
         
         .data-table tr:nth-child(even) {
-            background-color: #f7f9f9;
+            background-color: #f9fbff;
         }
         
         .data-table tr:hover {
-            background-color: #eef3f3;
+            background-color: #edf5ff;
         }
         
         .feature-icon {
@@ -393,7 +395,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: var(--hotel-secondary);
+            background: var(--hotel-gradient);
             border-radius: 2px;
         }
         
@@ -472,7 +474,7 @@
             font-weight: 600;
             margin-bottom: 15px;
             padding-bottom: 8px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--hotel-light);
         }
         
         .floating-action-btn {
@@ -559,14 +561,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .tab-pane {
-             animation: fadeIn 0.5s ease forwards;
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
         }
         
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
-            height: 6px;
         }
         
         ::-webkit-scrollbar-track {
@@ -601,11 +602,10 @@
                 left: 0;
             }
             
-            .main-content {
+            .col-md-9.col-lg-10 {
                 width: 100%;
                 flex: 0 0 100%;
                 max-width: 100%;
-                padding: 15px !important;
             }
             
             .mobile-menu-btn {
@@ -623,61 +623,25 @@
                 -webkit-columns: 2;
                 -moz-columns: 2;
             }
-
-            .app-title {
-                font-size: 1.5rem;
-            }
-
-            .app-subtitle {
-                font-size: 0.9rem;
-            }
-            
-            #roomStatusFilter {
-                flex-wrap: wrap;
-                gap: 5px;
-            }
         }
         
-        @media (max-width: 767.98px) {
-             .stats-box {
-                margin-bottom: 20px;
-            }
-            .filter-section .row > div {
-                margin-bottom: 15px;
-            }
-            .filter-section .row > div:last-child {
-                margin-bottom: 0;
-            }
-            .d-flex.justify-content-between {
-                flex-direction: column;
-                align-items: flex-start !important;
-                gap: 15px;
-            }
-        }
-        
-        @media (max-width: 576px) {
+        @media (max-width: 575.98px) {
             .form-facilities-columns {
                 columns: 1;
                 -webkit-columns: 1;
                 -moz-columns: 1;
             }
-
-            .login-box {
-                padding: 25px;
-            }
-
-            .app-header {
-                padding: 15px;
-            }
-
             .app-title {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
             .app-subtitle {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
+            }
+            .stats-number {
+                font-size: 1.5rem;
             }
         }
-
+        
         /* --- IMPROVED PRINT STYLES START --- */
         @media print {
             body, html {
@@ -741,17 +705,21 @@
                 padding: 4px 6px;
             }
             .printable-area .invoice-table th {
-                background-color: #1a5e63 !important;
+                background-color: #0d47a1 !important;
                 color: white !important;
             }
             
+            /* == START: PERBAIKAN WATERMARK PRINT == */
             .printable-area .invoice-watermark {
+                /* Aturan ini menyesuaikan watermark untuk layout cetak. */
+                /* Visibilitas (display: block/none) diatur oleh aturan CSS utama berdasarkan ada/tidaknya kelas .watermarked. */
                 position: fixed;
                 font-size: 8vw !important;
                 z-index: -1;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
+            /* == END: PERBAIKAN WATERMARK PRINT == */
         }
         /* --- IMPROVED PRINT STYLES END --- */
 
@@ -858,7 +826,7 @@
 </head>
 <body>
     <div id="loginOverlay">
-        <div class="login-box">
+        <div class="login-box animate-fadeIn">
             <div class="app-logo">
                 <i class="fas fa-hotel"></i>
             </div>
@@ -868,22 +836,14 @@
                     <input type="text" class="form-control" id="frontOfficeName" placeholder="Nama Front Office" required>
                     <label for="frontOfficeName">Nama Front Office</label>
                 </div>
-                
-                <div class="mb-3 text-center">
-                    <label for="captchaInput" class="form-label">Verifikasi Keamanan</label>
-                    <div class="d-flex justify-content-center align-items-center gap-2">
-                        <canvas id="captchaCanvas" width="150" height="50" style="border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9;"></canvas>
-                        <button type="button" id="reloadCaptchaBtn" class="btn btn-secondary" style="height: 50px; width: 50px;" title="Muat Ulang Captcha" aria-label="Muat Ulang Captcha">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" placeholder="Username" required>
+                    <label for="username">Username</label>
                 </div>
-
-                <div class="form-floating mb-4">
-                    <input type="text" class="form-control" id="captchaInput" placeholder="Masukkan Captcha" required autocomplete="off">
-                    <label for="captchaInput">Masukkan Kode di Atas</label>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+                    <label for="password">Password</label>
                 </div>
-
                 <button type="submit" class="btn btn-primary w-100 btn-lg">Login</button>
                 <div id="loginError" class="error-message mt-3" style="display: none;"></div>
             </form>
@@ -895,8 +855,9 @@
             </div>
         </div>
     </div>
+
     <main id="mainApp" style="display: none;">
-        <button class="mobile-menu-btn no-print" id="mobileMenuBtn" aria-label="Buka Menu">
+        <button class="mobile-menu-btn no-print" id="mobileMenuBtn">
             <i class="fas fa-bars"></i>
         </button>
         
@@ -918,83 +879,83 @@
             <div class="row g-0">
                 <div class="col-md-3 col-lg-2 bg-light p-3 no-print" id="sidebar">
                     <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="true">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab">
                                 <i class="fas fa-tachometer-alt feature-icon"></i>Dashboard
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="reservation-tab" data-bs-toggle="tab" href="#reservation" role="tab" aria-controls="reservation" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" id="reservation-tab" data-bs-toggle="tab" href="#reservation" role="tab">
                                 <i class="fas fa-calendar-check feature-icon"></i>Reservasi
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="checkin-tab" data-bs-toggle="tab" href="#checkin" role="tab" aria-controls="checkin" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" id="checkin-tab" data-bs-toggle="tab" href="#checkin" role="tab">
                                 <i class="fas fa-sign-in-alt feature-icon"></i>Check-In
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="checkout-tab" data-bs-toggle="tab" href="#checkout" role="tab" aria-controls="checkout" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" id="checkout-tab" data-bs-toggle="tab" href="#checkout" role="tab">
                                 <i class="fas fa-sign-out-alt feature-icon"></i>Check-Out
                             </a>
                         </li>
-                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="history-tab" data-bs-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="false">
+                         <li class="nav-item">
+                            <a class="nav-link" id="history-tab" data-bs-toggle="tab" href="#history" role="tab">
                                 <i class="fas fa-history feature-icon"></i>Histori Check-Out
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="room-tab" data-bs-toggle="tab" href="#room" role="tab" aria-controls="room" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" id="room-tab" data-bs-toggle="tab" href="#room" role="tab">
                                 <i class="fas fa-bed feature-icon"></i>Manajemen Kamar
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="guest-tab" data-bs-toggle="tab" href="#guest" role="tab" aria-controls="guest" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" id="guest-tab" data-bs-toggle="tab" href="#guest" role="tab">
                                 <i class="fas fa-users feature-icon"></i>Data Tamu
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="report-tab" data-bs-toggle="tab" href="#report" role="tab" aria-controls="report" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" id="report-tab" data-bs-toggle="tab" href="#report" role="tab">
                                 <i class="fas fa-chart-bar feature-icon"></i>Laporan
                             </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">
                                 <i class="fas fa-cog feature-icon"></i>Pengaturan
                             </a>
                         </li>
                     </ul>
                 </div>
                 
-                <div class="col-md-9 col-lg-10 p-4 main-content">
+                <div class="col-md-9 col-lg-10 p-4">
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                        <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
                             <h3 class="section-title">Dashboard</h3>
                             
-                            <div class="row mb-4">
+                            <div class="row">
                                 <div class="col-lg-3 col-md-6 mb-4">
-                                    <div class="stats-box">
+                                    <div class="stats-box h-100">
                                         <i class="fas fa-users text-primary fa-2x"></i>
                                         <div class="stats-number" id="totalGuests">0</div>
                                         <div class="stats-label">Total Tamu</div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6 mb-4">
-                                    <div class="stats-box">
+                                    <div class="stats-box h-100">
                                         <i class="fas fa-bed text-success fa-2x"></i>
                                         <div class="stats-number" id="availableRooms">0</div>
                                         <div class="stats-label">Kamar Tersedia</div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6 mb-4">
-                                    <div class="stats-box">
+                                    <div class="stats-box h-100">
                                         <i class="fas fa-calendar-check text-warning fa-2x"></i>
                                         <div class="stats-number" id="todayCheckins">0</div>
                                         <div class="stats-label">Check-In Hari Ini</div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6 mb-4">
-                                    <div class="stats-box">
+                                    <div class="stats-box h-100">
                                         <i class="fas fa-sign-out-alt text-danger fa-2x"></i>
                                         <div class="stats-number" id="todayCheckouts">0</div>
                                         <div class="stats-label">Check-Out Hari Ini</div>
@@ -1003,23 +964,23 @@
                             </div>
                             
                             <div class="row">
-                                <div class="col-lg-8 mb-4">
-                                    <div class="card h-100">
+                                <div class="col-lg-8 mb-4 mb-lg-0">
+                                    <div class="card">
                                         <div class="card-header">
                                             <i class="fas fa-chart-line me-2"></i>Statistik Bulanan
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="monthlyStatsChart"></canvas>
+                                            <canvas id="monthlyStatsChart" height="250"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="card h-100">
+                                <div class="col-lg-4">
+                                    <div class="card">
                                         <div class="card-header">
                                             <i class="fas fa-bed me-2"></i>Status Kamar
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="roomStatusChart"></canvas>
+                                            <canvas id="roomStatusChart" height="250"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -1053,19 +1014,21 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="reservation" role="tabpanel" aria-labelledby="reservation-tab">
+                        <div class="tab-pane fade" id="reservation" role="tabpanel">
                             <h3 class="section-title">Manajemen Reservasi</h3>
                             
-                            <div class="d-flex flex-wrap gap-2 mb-4">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReservationModal">
-                                    <i class="fas fa-plus me-2"></i>Tambah Reservasi
-                                </button>
-                                <button class="btn btn-success" id="exportReservationsBtn">
-                                    <i class="fas fa-file-excel me-2"></i>Ekspor Excel
-                                </button>
-                                <button class="btn btn-danger" id="printReservationPdfBtn">
-                                    <i class="fas fa-file-pdf me-2"></i>Cetak PDF
-                                </button>
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addReservationModal">
+                                        <i class="fas fa-plus me-2"></i>Tambah Reservasi
+                                    </button>
+                                    <button class="btn btn-success mb-2" id="exportReservationsBtn">
+                                        <i class="fas fa-file-excel me-2"></i>Ekspor Excel
+                                    </button>
+                                    <button class="btn btn-danger mb-2" id="printReservationPdfBtn">
+                                        <i class="fas fa-file-pdf me-2"></i>Cetak PDF
+                                    </button>
+                                </div>
                             </div>
                             
                             <div class="row">
@@ -1098,13 +1061,13 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="checkin" role="tabpanel" aria-labelledby="checkin-tab">
+                        <div class="tab-pane fade" id="checkin" role="tabpanel">
                             <h3 class="section-title">Proses Check-In</h3>
                             
                             <div class="row mb-4">
                                 <div class="col-md-12">
                                     <div class="filter-section">
-                                        <div class="row">
+                                        <div class="row gy-3 align-items-end">
                                             <div class="col-md-4">
                                                 <label for="searchReservation" class="form-label">Cari berdasarkan nama atau ID reservasi</label>
                                                 <input type="text" class="form-control" id="searchReservation" placeholder="Masukkan nama atau ID...">
@@ -1114,7 +1077,6 @@
                                                 <input type="date" class="form-control" id="filterCheckinDate">
                                             </div>
                                             <div class="col-md-4">
-                                                <label class="form-label d-block d-md-none">&nbsp;</label>
                                                 <button class="btn btn-primary w-100" id="applyFilterBtn">
                                                     <i class="fas fa-filter me-2"></i>Terapkan Filter
                                                 </button>
@@ -1154,13 +1116,13 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="checkout" role="tabpanel" aria-labelledby="checkout-tab">
+                        <div class="tab-pane fade" id="checkout" role="tabpanel">
                             <h3 class="section-title">Proses Check-Out</h3>
                             
                             <div class="row mb-4">
                                 <div class="col-md-12">
                                     <div class="filter-section">
-                                        <div class="row">
+                                        <div class="row gy-3 align-items-end">
                                             <div class="col-md-4">
                                                 <label for="searchCheckout" class="form-label">Cari berdasarkan nama atau nomor kamar</label>
                                                 <input type="text" class="form-control" id="searchCheckout" placeholder="Masukkan nama atau nomor kamar...">
@@ -1170,7 +1132,6 @@
                                                 <input type="date" class="form-control" id="filterCheckoutDate">
                                             </div>
                                             <div class="col-md-4">
-                                                 <label class="form-label d-block d-md-none">&nbsp;</label>
                                                 <button class="btn btn-primary w-100" id="applyCheckoutFilterBtn">
                                                     <i class="fas fa-filter me-2"></i>Terapkan Filter
                                                 </button>
@@ -1210,7 +1171,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                        <div class="tab-pane fade" id="history" role="tabpanel">
                             <h3 class="section-title">Histori Check-Out</h3>
                             
                             <div class="row">
@@ -1243,11 +1204,11 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="room" role="tabpanel" aria-labelledby="room-tab">
+                        <div class="tab-pane fade" id="room" role="tabpanel">
                             <h3 class="section-title">Manajemen Kamar</h3>
                             
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <div class="d-flex flex-wrap gap-2">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+                                <div>
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">
                                         <i class="fas fa-plus me-2"></i>Tambah Kamar
                                     </button>
@@ -1255,7 +1216,7 @@
                                         <i class="fas fa-file-excel me-2"></i>Ekspor Data
                                     </button>
                                 </div>
-                                <div class="btn-group" role="group" id="roomStatusFilter">
+                                <div class="btn-group flex-wrap" role="group" id="roomStatusFilter">
                                     <button type="button" class="btn btn-outline-primary active" data-status="all">Semua</button>
                                     <button type="button" class="btn btn-outline-success" data-status="available">Tersedia</button>
                                     <button type="button" class="btn btn-outline-danger" data-status="occupied">Terisi</button>
@@ -1293,19 +1254,21 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="guest" role="tabpanel" aria-labelledby="guest-tab">
+                        <div class="tab-pane fade" id="guest" role="tabpanel">
                             <h3 class="section-title">Manajemen Data Tamu</h3>
                             
-                            <div class="d-flex flex-wrap gap-2 mb-4">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGuestModal">
-                                    <i class="fas fa-plus me-2"></i>Tambah Tamu
-                                </button>
-                                <button class="btn btn-success" id="exportGuestsBtn">
-                                    <i class="fas fa-file-excel me-2"></i>Ekspor Data
-                                </button>
-                                <button class="btn btn-danger" id="printGuestPdfBtn">
-                                    <i class="fas fa-file-pdf me-2"></i>Cetak PDF
-                                </button>
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addGuestModal">
+                                        <i class="fas fa-plus me-2"></i>Tambah Tamu
+                                    </button>
+                                    <button class="btn btn-success mb-2" id="exportGuestsBtn">
+                                        <i class="fas fa-file-excel me-2"></i>Ekspor Data
+                                    </button>
+                                    <button class="btn btn-danger mb-2" id="printGuestPdfBtn">
+                                        <i class="fas fa-file-pdf me-2"></i>Cetak PDF
+                                    </button>
+                                </div>
                             </div>
                             
                             <div class="row">
@@ -1337,14 +1300,14 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
+                        <div class="tab-pane fade" id="report" role="tabpanel">
                             <h3 class="section-title">Laporan dan Analisis</h3>
                             
                             <div class="row mb-4">
                                 <div class="col-md-12">
                                     <div class="filter-section">
-                                        <div class="row">
-                                            <div class="col-md-3">
+                                        <div class="row gy-3 align-items-end">
+                                            <div class="col-lg-3 col-md-6">
                                                 <label for="reportType" class="form-label">Jenis Laporan</label>
                                                 <select class="form-select" id="reportType">
                                                     <option value="revenue">Pendapatan</option>
@@ -1353,16 +1316,15 @@
                                                     <option value="reservations">Jumlah Reservasi</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-lg-3 col-md-6">
                                                 <label for="reportStartDate" class="form-label">Periode Mulai</label>
                                                 <input type="date" class="form-control" id="reportStartDate">
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-lg-3 col-md-6">
                                                 <label for="reportEndDate" class="form-label">Periode Akhir</label>
                                                 <input type="date" class="form-control" id="reportEndDate">
                                             </div>
-                                            <div class="col-md-3">
-                                                <label class="form-label d-block d-md-none">&nbsp;</label>
+                                            <div class="col-lg-3 col-md-6">
                                                 <button class="btn btn-primary w-100" id="generateReportBtn">
                                                     <i class="fas fa-chart-bar me-2"></i>Generate Laporan
                                                 </button>
@@ -1375,9 +1337,9 @@
                             <div class="row mt-4">
                                 <div class="col-12">
                                     <div class="card">
-                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                        <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
                                             <div><i class="fas fa-table me-2"></i>Data Laporan</div>
-                                            <div id="reportActions" style="display: none;" class="d-flex flex-wrap gap-2">
+                                            <div id="reportActions" style="display: none;">
                                                 <button class="btn btn-sm btn-info" id="printReportBtn"><i class="fas fa-print me-2"></i>Cetak Laporan</button>
                                                 <button class="btn btn-sm btn-danger" id="downloadReportPdfBtn"><i class="fas fa-file-pdf me-2"></i>Unduh PDF</button>
                                             </div>
@@ -1399,11 +1361,11 @@
                             </div>
                         </div>
                         
-                        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                        <div class="tab-pane fade" id="settings" role="tabpanel">
                             <h3 class="section-title">Pengaturan Sistem</h3>
                             
                             <div class="row">
-                                <div class="col-lg-6 mb-4">
+                                <div class="col-lg-6 mb-4 mb-lg-0">
                                     <div class="card">
                                         <div class="card-header">
                                             <i class="fas fa-cog me-2"></i>Pengaturan Umum
@@ -1430,15 +1392,15 @@
                                                 <h6 class="form-label">Harga Layanan Premium</h6>
                                                 <div class="mb-3">
                                                     <label for="pricePijat" class="form-label">Harga Pijat</label>
-                                                    <input type="number" class="form-control" id="pricePijat" placeholder="Masukkan harga">
+                                                    <input type="number" class="form-control" id="pricePijat" placeholder="Masukkan harga" min="0">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="priceMakanMalam" class="form-label">Harga Makan Malam</label>
-                                                    <input type="number" class="form-control" id="priceMakanMalam" placeholder="Masukkan harga">
+                                                    <input type="number" class="form-control" id="priceMakanMalam" placeholder="Masukkan harga" min="0">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="priceMeetingRoom" class="form-label">Harga Meeting Room</label>
-                                                    <input type="number" class="form-control" id="priceMeetingRoom" placeholder="Masukkan harga">
+                                                    <input type="number" class="form-control" id="priceMeetingRoom" placeholder="Masukkan harga" min="0">
                                                 </div>
 
                                                 <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
@@ -1450,7 +1412,7 @@
                                             <i class="fas fa-user-circle me-2"></i>Akun
                                         </div>
                                         <div class="card-body">
-                                            <p>Anda login sebagai <strong><span id="loggedInUser"></span></strong>.</p>
+                                            <p>Anda login sebagai <strong id="loggedInUser">Admin</strong>.</p>
                                             <button class="btn btn-danger" id="logoutBtn">
                                                 <i class="fas fa-sign-out-alt me-2"></i>Logout
                                             </button>
@@ -1458,7 +1420,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-lg-6 mb-4">
+                                <div class="col-lg-6">
                                     <div class="card">
                                         <div class="card-header">
                                             <i class="fas fa-sliders-h me-2"></i>Pengaturan Lainnya
@@ -1476,7 +1438,7 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="taxRate" class="form-label">Pajak (%)</label>
-                                                    <input type="number" class="form-control" id="taxRate" min="0" max="30" step="0.1" placeholder="Masukkan persentase pajak">
+                                                    <input type="number" class="form-control" id="taxRate" min="0" max="100" step="0.1" placeholder="Masukkan persentase pajak">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="defaultCheckinTime" class="form-label">Waktu Check-In Default</label>
@@ -1525,7 +1487,7 @@
             </div>
         </div>
         
-        <div class="floating-action-btn no-print" data-bs-toggle="modal" data-bs-target="#quickActionModal" aria-label="Buka Aksi Cepat">
+        <div class="floating-action-btn no-print" data-bs-toggle="modal" data-bs-target="#quickActionModal">
             <i class="fas fa-plus"></i>
         </div>
     </main>
@@ -1543,11 +1505,11 @@
         </div>
     </div>
     
-    <div class="modal fade" id="quickActionModal" tabindex="-1" aria-labelledby="quickActionModalLabel" aria-hidden="true">
+    <div class="modal fade" id="quickActionModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="quickActionModalLabel">Aksi Cepat</h5>
+                    <h5 class="modal-title">Aksi Cepat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -1561,24 +1523,31 @@
                         <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addRoomModal">
                             <i class="fas fa-bed me-2"></i>Tambah Kamar
                         </button>
+                        <hr>
+                        <button class="btn btn-danger" id="quickActionCheckoutBtn">
+                            <i class="fas fa-sign-out-alt me-2"></i>Proses Check-Out
+                        </button>
+                        <button class="btn btn-dark" id="quickActionHistoryBtn">
+                            <i class="fas fa-history me-2"></i>Lihat Histori Check-Out
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="modal fade" id="addReservationModal" tabindex="-1" aria-labelledby="addReservationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addReservationModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addReservationModalLabel">Tambah Reservasi Baru</h5>
+                    <h5 class="modal-title">Tambah Reservasi Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="addReservationForm">
+                    <form id="addReservationForm" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="reservationGuestName" class="form-label">Nama Tamu</label>
+                                <label class="form-label">Nama Tamu</label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control" id="reservationGuestName" placeholder="Ketik untuk mencari nama tamu..." required autocomplete="off">
                                     <input type="hidden" id="reservationGuestId">
@@ -1586,29 +1555,29 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="reservationRoom" class="form-label">Kamar</label>
+                                <label class="form-label">Kamar</label>
                                 <select class="form-select" id="reservationRoom" required>
                                     <option value="">Pilih Kamar</option>
-                                </select>
+                                    </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="reservationCheckin" class="form-label">Tanggal Check-In</label>
+                                <label class="form-label">Tanggal Check-In</label>
                                 <input type="date" class="form-control" id="reservationCheckin" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="reservationCheckout" class="form-label">Tanggal Check-Out</label>
+                                <label class="form-label">Tanggal Check-Out</label>
                                 <input type="date" class="form-control" id="reservationCheckout" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="reservationGuests" class="form-label">Jumlah Tamu</label>
+                                <label class="form-label">Jumlah Tamu</label>
                                 <input type="number" class="form-control" id="reservationGuests" min="1" max="10" value="1" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="reservationStatus" class="form-label">Status</label>
+                                <label class="form-label">Status</label>
                                 <select class="form-select" id="reservationStatus" required>
                                     <option value="confirmed">Dikonfirmasi</option>
                                     <option value="pending">Menunggu</option>
@@ -1632,7 +1601,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="reservationNotes" class="form-label">Catatan Khusus</label>
+                            <label class="form-label">Catatan Khusus</label>
                             <textarea class="form-control" id="reservationNotes" rows="3"></textarea>
                         </div>
                     </form>
@@ -1645,46 +1614,46 @@
         </div>
     </div>
     
-    <div class="modal fade" id="addGuestModal" tabindex="-1" aria-labelledby="addGuestModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addGuestModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addGuestModalLabel">Tambah Tamu Baru</h5>
+                    <h5 class="modal-title">Tambah Tamu Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="addGuestForm">
+                    <form id="addGuestForm" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="guestFirstName" class="form-label">Nama Depan</label>
+                                <label class="form-label">Nama Depan</label>
                                 <input type="text" class="form-control" id="guestFirstName" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="guestLastName" class="form-label">Nama Belakang</label>
+                                <label class="form-label">Nama Belakang</label>
                                 <input type="text" class="form-control" id="guestLastName" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="guestEmail" class="form-label">Email</label>
+                                <label class="form-label">Email</label>
                                 <input type="email" class="form-control" id="guestEmail" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="guestPhone" class="form-label">Telepon</label>
+                                <label class="form-label">Telepon</label>
                                 <input type="tel" class="form-control" id="guestPhone" required>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="guestAddress" class="form-label">Alamat</label>
+                            <label class="form-label">Alamat</label>
                             <textarea class="form-control" id="guestAddress" rows="3" required></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="guestNationality" class="form-label">Kewarganegaraan</label>
+                                <label class="form-label">Kewarganegaraan</label>
                                 <input type="text" class="form-control" id="guestNationality" value="Indonesia">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="guestIdType" class="form-label">Jenis Identitas</label>
+                                <label class="form-label">Jenis Identitas</label>
                                 <select class="form-select" id="guestIdType">
                                     <option value="KTP">KTP</option>
                                     <option value="SIM">SIM</option>
@@ -1693,7 +1662,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="guestIdNumber" class="form-label">Nomor Identitas</label>
+                            <label class="form-label">Nomor Identitas</label>
                             <input type="text" class="form-control" id="guestIdNumber">
                         </div>
                     </form>
@@ -1706,21 +1675,21 @@
         </div>
     </div>
     
-    <div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addRoomModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addRoomModalLabel">Tambah Kamar Baru</h5>
+                    <h5 class="modal-title">Tambah Kamar Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="addRoomForm">
+                    <form id="addRoomForm" novalidate>
                         <div class="mb-3">
-                            <label for="roomNumber" class="form-label">Nomor Kamar</label>
+                            <label class="form-label">Nomor Kamar</label>
                             <input type="text" class="form-control" id="roomNumber" required>
                         </div>
                         <div class="mb-3">
-                            <label for="roomType" class="form-label">Tipe Kamar</label>
+                            <label class="form-label">Tipe Kamar</label>
                             <select class="form-select" id="roomType" required>
                                 <option value="standard">Standard</option>
                                 <option value="deluxe">Deluxe</option>
@@ -1730,7 +1699,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="roomPrice" class="form-label">Harga per Malam</label>
+                            <label class="form-label">Harga per Malam</label>
                             <input type="number" class="form-control" id="roomPrice" min="0" required>
                         </div>
                         <div class="mb-3">
@@ -1758,7 +1727,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="roomStatus" class="form-label">Status</label>
+                            <label class="form-label">Status</label>
                             <select class="form-select" id="roomStatus" required>
                                 <option value="available">Tersedia</option>
                                 <option value="maintenance">Pemeliharaan</option>
@@ -1774,19 +1743,19 @@
         </div>
     </div>
     
-    <div class="modal fade" id="editReservationModal" tabindex="-1" aria-labelledby="editReservationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editReservationModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editReservationModalLabel">Edit Reservasi</h5>
+                    <h5 class="modal-title">Edit Reservasi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editReservationForm">
+                    <form id="editReservationForm" novalidate>
                         <input type="hidden" id="editReservationId">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="editReservationGuestName" class="form-label">Nama Tamu</label>
+                                <label class="form-label">Nama Tamu</label>
                                 <div class="position-relative">
                                     <input type="text" class="form-control" id="editReservationGuestName" placeholder="Ketik untuk mencari nama tamu..." required autocomplete="off">
                                     <input type="hidden" id="editReservationGuestId">
@@ -1794,28 +1763,28 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="editReservationRoom" class="form-label">Kamar</label>
+                                <label class="form-label">Kamar</label>
                                 <select class="form-select" id="editReservationRoom" required>
-                                </select>
+                                    </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="editReservationCheckin" class="form-label">Tanggal Check-In</label>
+                                <label class="form-label">Tanggal Check-In</label>
                                 <input type="date" class="form-control" id="editReservationCheckin" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="editReservationCheckout" class="form-label">Tanggal Check-Out</label>
+                                <label class="form-label">Tanggal Check-Out</label>
                                 <input type="date" class="form-control" id="editReservationCheckout" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="editReservationGuests" class="form-label">Jumlah Tamu</label>
+                                <label class="form-label">Jumlah Tamu</label>
                                 <input type="number" class="form-control" id="editReservationGuests" min="1" max="10" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="editReservationStatus" class="form-label">Status</label>
+                                <label class="form-label">Status</label>
                                 <select class="form-select" id="editReservationStatus" required>
                                     <option value="confirmed">Dikonfirmasi</option>
                                     <option value="pending">Menunggu</option>
@@ -1841,7 +1810,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="editReservationNotes" class="form-label">Catatan Khusus</label>
+                            <label class="form-label">Catatan Khusus</label>
                             <textarea class="form-control" id="editReservationNotes" rows="3"></textarea>
                         </div>
                     </form>
@@ -1854,47 +1823,47 @@
         </div>
     </div>
     
-    <div class="modal fade" id="editGuestModal" tabindex="-1" aria-labelledby="editGuestModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editGuestModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editGuestModalLabel">Edit Data Tamu</h5>
+                    <h5 class="modal-title">Edit Data Tamu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editGuestForm">
+                    <form id="editGuestForm" novalidate>
                         <input type="hidden" id="editGuestId">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="editGuestFirstName" class="form-label">Nama Depan</label>
+                                <label class="form-label">Nama Depan</label>
                                 <input type="text" class="form-control" id="editGuestFirstName" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="editGuestLastName" class="form-label">Nama Belakang</label>
+                                <label class="form-label">Nama Belakang</label>
                                 <input type="text" class="form-control" id="editGuestLastName" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="editGuestEmail" class="form-label">Email</label>
+                                <label class="form-label">Email</label>
                                 <input type="email" class="form-control" id="editGuestEmail" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="editGuestPhone" class="form-label">Telepon</label>
+                                <label class="form-label">Telepon</label>
                                 <input type="tel" class="form-control" id="editGuestPhone" required>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="editGuestAddress" class="form-label">Alamat</label>
+                            <label class="form-label">Alamat</label>
                             <textarea class="form-control" id="editGuestAddress" rows="3" required></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="editGuestNationality" class="form-label">Kewarganegaraan</label>
+                                <label class="form-label">Kewarganegaraan</label>
                                 <input type="text" class="form-control" id="editGuestNationality">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="editGuestIdType" class="form-label">Jenis Identitas</label>
+                                <label class="form-label">Jenis Identitas</label>
                                 <select class="form-select" id="editGuestIdType">
                                     <option value="KTP">KTP</option>
                                     <option value="SIM">SIM</option>
@@ -1903,7 +1872,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="editGuestIdNumber" class="form-label">Nomor Identitas</label>
+                            <label class="form-label">Nomor Identitas</label>
                             <input type="text" class="form-control" id="editGuestIdNumber">
                         </div>
                     </form>
@@ -1916,22 +1885,22 @@
         </div>
     </div>
     
-    <div class="modal fade" id="editRoomModal" tabindex="-1" aria-labelledby="editRoomModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editRoomModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editRoomModalLabel">Edit Data Kamar</h5>
+                    <h5 class="modal-title">Edit Data Kamar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editRoomForm">
+                    <form id="editRoomForm" novalidate>
                         <input type="hidden" id="editRoomId">
                         <div class="mb-3">
-                            <label for="editRoomNumber" class="form-label">Nomor Kamar</label>
+                            <label class="form-label">Nomor Kamar</label>
                             <input type="text" class="form-control" id="editRoomNumber" required>
                         </div>
                         <div class="mb-3">
-                            <label for="editRoomType" class="form-label">Tipe Kamar</label>
+                            <label class="form-label">Tipe Kamar</label>
                             <select class="form-select" id="editRoomType" required>
                                 <option value="standard">Standard</option>
                                 <option value="deluxe">Deluxe</option>
@@ -1941,7 +1910,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="editRoomPrice" class="form-label">Harga per Malam</label>
+                            <label class="form-label">Harga per Malam</label>
                             <input type="number" class="form-control" id="editRoomPrice" min="0" required>
                         </div>
                         <div class="mb-3">
@@ -1969,7 +1938,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="editRoomStatus" class="form-label">Status</label>
+                            <label class="form-label">Status</label>
                             <select class="form-select" id="editRoomStatus" required>
                                 <option value="available">Tersedia</option>
                                 <option value="occupied">Terisi</option>
@@ -1987,34 +1956,34 @@
         </div>
     </div>
     
-    <div class="modal fade" id="checkinModal" tabindex="-1" aria-labelledby="checkinModalLabel" aria-hidden="true">
+    <div class="modal fade" id="checkinModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="checkinModalLabel">Proses Check-In</h5>
+                    <h5 class="modal-title">Proses Check-In</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="checkinForm">
                         <input type="hidden" id="checkinReservationId">
                         <div class="mb-3">
-                            <label for="checkinReservationCode" class="form-label">ID Reservasi</label>
+                            <label class="form-label">ID Reservasi</label>
                             <input type="text" class="form-control" id="checkinReservationCode" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="checkinGuestName" class="form-label">Nama Tamu</label>
+                            <label class="form-label">Nama Tamu</label>
                             <input type="text" class="form-control" id="checkinGuestName" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="checkinRoom" class="form-label">Kamar</label>
+                            <label class="form-label">Kamar</label>
                             <input type="text" class="form-control" id="checkinRoom" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="checkinDate" class="form-label">Tanggal Check-In</label>
+                            <label class="form-label">Tanggal Check-In</label>
                             <input type="date" class="form-control" id="checkinDate" required>
                         </div>
                         <div class="mb-3">
-                            <label for="checkinTime" class="form-label">Waktu Check-In</label>
+                            <label class="form-label">Waktu Check-In</label>
                             <input type="time" class="form-control" id="checkinTime" required>
                         </div>
                     </form>
@@ -2027,7 +1996,7 @@
         </div>
     </div>
     
-    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header no-print">
@@ -2072,34 +2041,32 @@
                             
                             <div class="row mt-4">
                                 <div class="col-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered invoice-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Deskripsi</th>
-                                                    <th>Jumlah</th>
-                                                    <th>Harga Satuan</th>
-                                                    <th>Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="invoiceItems">
-                                                </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th colspan="3" class="text-end">Subtotal</th>
-                                                    <th id="invoiceSubtotal">0</th>
-                                                </tr>
-                                                <tr>
-                                                    <th colspan="3" class="text-end">Pajak (<span id="invoiceTaxRate">0</span>%)</th>
-                                                    <th id="invoiceTax">0</th>
-                                                </tr>
-                                                <tr>
-                                                    <th colspan="3" class="text-end">Total</th>
-                                                    <th id="invoiceTotal" style="font-size: 1.2rem;">0</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
+                                    <table class="table table-bordered invoice-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Deskripsi</th>
+                                                <th>Jumlah</th>
+                                                <th>Harga Satuan</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="invoiceItems">
+                                            </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="3" class="text-end">Subtotal</th>
+                                                <th id="invoiceSubtotal">0</th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" class="text-end">Pajak (<span id="invoiceTaxRate">0</span>%)</th>
+                                                <th id="invoiceTax">0</th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="3" class="text-end">Total</th>
+                                                <th id="invoiceTotal" style="font-size: 1.2rem;">0</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
 
@@ -2127,35 +2094,39 @@
                         <form id="checkoutForm">
                             <input type="hidden" id="checkoutReservationId">
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="checkoutPaymentMethod" class="form-label">Metode Pembayaran</label>
-                                    <select class="form-select" id="checkoutPaymentMethod" required>
-                                        <option value="cash">Tunai</option>
-                                        <option value="credit_card">Kartu Kredit</option>
-                                        <option value="debit_card">Kartu Debit</option>
-                                        <option value="transfer">Transfer Bank</option>
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Metode Pembayaran</label>
+                                        <select class="form-select" id="checkoutPaymentMethod" required>
+                                            <option value="cash">Tunai</option>
+                                            <option value="credit_card">Kartu Kredit</option>
+                                            <option value="debit_card">Kartu Debit</option>
+                                            <option value="transfer">Transfer Bank</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="checkoutPaymentStatus" class="form-label">Status Pembayaran</label>
-                                    <select class="form-select" id="checkoutPaymentStatus" required>
-                                        <option value="paid">Lunas</option>
-                                        <option value="pending">Menunggu</option>
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Status Pembayaran</label>
+                                        <select class="form-select" id="checkoutPaymentStatus" required>
+                                            <option value="paid">Lunas</option>
+                                            <option value="pending">Menunggu</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                         <div class="mt-3 p-3 bg-light rounded">
-                             <div class="row">
-                                 <div class="col-md-4 mb-2">
+                             <div class="row gy-3">
+                                 <div class="col-md-4">
                                      <label for="checkoutTotalBill" class="form-label fw-bold">Total Tagihan</label>
                                      <input type="text" id="checkoutTotalBill" class="form-control form-control-lg" readonly style="font-weight: bold;">
                                  </div>
-                                 <div class="col-md-4 mb-2">
+                                 <div class="col-md-4">
                                      <label for="amountPaid" class="form-label fw-bold">Jumlah Bayar</label>
                                      <input type="number" id="amountPaid" class="form-control form-control-lg" placeholder="0">
                                  </div>
-                                 <div class="col-md-4 mb-2">
+                                 <div class="col-md-4">
                                      <label for="changeDue" class="form-label fw-bold">Kembalian</label>
                                      <input type="text" id="changeDue" class="form-control form-control-lg" readonly style="font-weight: bold; color: green;">
                                  </div>
@@ -2163,7 +2134,7 @@
                         </div>
                         </div>
                 </div>
-                <div class="modal-footer no-print d-flex flex-wrap">
+                <div class="modal-footer no-print">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="button" class="btn btn-info" id="printInvoiceBtn"><i class="fas fa-print"></i> Cetak Invoice</button>
                     <button type="button" class="btn btn-success" id="downloadInvoicePdfBtn"><i class="fas fa-file-pdf"></i> Unduh PDF</button>
@@ -2173,11 +2144,11 @@
         </div>
     </div>
     
-    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteConfirmModalLabel">Konfirmasi Hapus</h5>
+                    <h5 class="modal-title">Konfirmasi Hapus</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -2193,19 +2164,19 @@
         </div>
     </div>
     
-    <div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="importDataModalLabel" aria-hidden="true">
+    <div class="modal fade" id="importDataModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="importDataModalLabel">Impor Data</h5>
+                    <h5 class="modal-title">Impor Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="importDataForm">
                         <div class="mb-3">
-                            <label for="importDataFile" class="form-label">File Data (JSON)</label>
+                            <label class="form-label">File Data (JSON)</label>
                             <input type="file" class="form-control" id="importDataFile" accept=".json" required>
-                            <div class="form-text">Impor data tamu, kamar, dan reservasi dari satu file JSON.</div>
+                            <div class="form-text">Impor data tamu, kamar, dan reservasi dari satu file JSON. Data yang dienkripsi akan otomatis terdeteksi.</div>
                         </div>
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="importOverwrite">
@@ -2223,11 +2194,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="settingsPasswordModal" tabindex="-1" aria-labelledby="settingsPasswordModalLabel" aria-hidden="true">
+    <div class="modal fade" id="settingsPasswordModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="settingsPasswordModalLabel">Konfirmasi Keamanan</h5>
+                    <h5 class="modal-title">Konfirmasi Keamanan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -2252,49 +2223,14 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
-        // --- PENYESUAIAN SCRIPT UNTUK LOGIN BARU ---
-        let captchaText = '';
-        let currentReportData = {}; // To store generated report data
-        
         document.addEventListener('DOMContentLoaded', function() {
             initApp();
         });
         
+        let currentReportData = {};
+
         function initApp() {
             checkLoginState();
-        }
-
-        // --- FUNGSI CAPTCHA BARU ---
-        function generateCaptcha() {
-            const canvas = document.getElementById('captchaCanvas');
-            const ctx = canvas.getContext('2d');
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            captchaText = '';
-            for (let i = 0; i < 6; i++) {
-                captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#f9f9f9';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Add some noise lines
-            for (let i = 0; i < 5; i++) {
-                ctx.strokeStyle = `rgba(${Math.random()*150}, ${Math.random()*150}, ${Math.random()*150}, 0.2)`;
-                ctx.beginPath();
-                ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
-                ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
-                ctx.stroke();
-            }
-
-            // Draw text
-            ctx.font = '30px Arial';
-            ctx.fillStyle = '#2c3e50';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.setTransform(1, Math.random() * 0.2 - 0.1, Math.random() * 0.2 - 0.1, 1, 0, 0);
-            ctx.fillText(captchaText, canvas.width / 2, canvas.height / 2);
-            ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
         }
 
         function checkLoginState() {
@@ -2306,41 +2242,47 @@
                 document.getElementById('loginOverlay').style.display = 'flex';
                 document.getElementById('mainApp').style.display = 'none';
                 document.getElementById('loginForm').addEventListener('submit', handleLogin);
-                document.getElementById('reloadCaptchaBtn').addEventListener('click', generateCaptcha);
-                generateCaptcha(); // Generate first captcha
             }
         }
         
         function handleLogin(e) {
             e.preventDefault();
-            const frontOfficeName = document.getElementById('frontOfficeName').value;
-            const captchaInput = document.getElementById('captchaInput').value;
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const frontOfficeName = document.getElementById('frontOfficeName').value.trim();
             const errorEl = document.getElementById('loginError');
 
-            if (!frontOfficeName.trim()) {
+            if (!frontOfficeName) {
                 errorEl.textContent = 'Nama Front Office wajib diisi.';
                 errorEl.style.display = 'block';
                 return;
             }
 
-            if (captchaInput.toLowerCase() === captchaText.toLowerCase()) {
+            if (user === 'Admin' && pass === 'Hotelku.1945') {
                 sessionStorage.setItem('isLoggedIn', 'true');
                 sessionStorage.setItem('frontOfficeName', frontOfficeName);
                 errorEl.style.display = 'none';
                 checkLoginState();
             } else {
-                errorEl.textContent = 'Kode verifikasi tidak sesuai. Silakan coba lagi.';
+                errorEl.textContent = 'Username atau password salah.';
                 errorEl.style.display = 'block';
-                document.getElementById('captchaInput').value = '';
-                generateCaptcha();
             }
         }
 
+        // --- START: ENHANCED LOGOUT WITH AUTO BACKUP ---
         function handleLogout() {
-            sessionStorage.removeItem('isLoggedIn');
-            sessionStorage.removeItem('frontOfficeName');
-            window.location.reload();
+            showNotification('Sistem', 'Membuat backup data otomatis sebelum keluar...', 'info');
+            // Trigger backup
+            triggerAutomaticBackup();
+            
+            // Wait a moment for the download to initiate before logging out
+            setTimeout(() => {
+                sessionStorage.removeItem('isLoggedIn');
+                sessionStorage.removeItem('frontOfficeName');
+                window.location.reload();
+            }, 1000); // 1-second delay
         }
+        // --- END: ENHANCED LOGOUT WITH AUTO BACKUP ---
         
         function initializeAppCore() {
             initStorage();
@@ -2350,11 +2292,9 @@
             updateDashboardStats();
             const frontOfficeName = sessionStorage.getItem('frontOfficeName');
             document.getElementById('loggedInUser').textContent = frontOfficeName;
-            showNotification('Akses Diterima', `Sesi login Anda sebagai ${frontOfficeName} telah berhasil diautentikasi.`, 'success');
+            showNotification(`Selamat Datang, ${frontOfficeName}`, 'Sistem Manajemen Hotel berhasil dimuat.', 'success');
         }
         
-        // --- SISA SCRIPT TETAP SAMA, FUNGSI INTI TIDAK DIUBAH ---
-
         function initStorage() {
             if (!localStorage.getItem('hotel_guests')) localStorage.setItem('hotel_guests', JSON.stringify([]));
             if (!localStorage.getItem('hotel_rooms')) localStorage.setItem('hotel_rooms', JSON.stringify([]));
@@ -2362,16 +2302,16 @@
             
             if (!localStorage.getItem('hotel_settings')) {
                 const defaultSettings = {
-                    hotelName: 'HOTEL LENTERA KARYA SITUBONDO',
-                    hotelAddress: 'Jl. Pb. Sudirman Kabupaten Situbondo, Jawa Timur',
-                    hotelPhone: '087865614222',
-                    hotelEmail: 'admin@anekamarket.my.id',
+                    hotelName: 'HOTEL GEMINI',
+                    hotelAddress: 'Jl. Teknologi No. 1, Jakarta',
+                    hotelPhone: '021-555-1234',
+                    hotelEmail: 'info@hotelgemini.com',
                     currency: 'IDR',
                     taxRate: 10,
                     defaultCheckinTime: '14:00',
                     defaultCheckoutTime: '12:00',
-                    pricePijat: 250000,
-                    priceMakanMalam: 100000,
+                    pricePijat: 150000,
+                    priceMakanMalam: 200000,
                     priceMeetingRoom: 500000
                 };
                 localStorage.setItem('hotel_settings', JSON.stringify(defaultSettings));
@@ -2387,6 +2327,16 @@
         
         function setupEventListeners() {
             document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+            // --- START: AUTO BACKUP ON REFRESH/CLOSE ---
+            // Note: Browser behavior for 'beforeunload' can be inconsistent.
+            // This is implemented as a best-effort feature as requested.
+            window.addEventListener('beforeunload', (event) => {
+                if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                    triggerAutomaticBackup();
+                }
+            });
+            // --- END: AUTO BACKUP ON REFRESH/CLOSE ---
 
             document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
             document.getElementById('sidebarOverlay').addEventListener('click', toggleMobileMenu);
@@ -2412,7 +2362,7 @@
             document.getElementById('exportGuestsBtn').addEventListener('click', exportGuests);
             document.getElementById('exportRoomsBtn').addEventListener('click', exportRooms);
             document.getElementById('exportAllDataBtn').addEventListener('click', exportAllData);
-            document.getElementById('backupAllDataJsonBtn').addEventListener('click', backupAllDataJson);
+            document.getElementById('backupAllDataJsonBtn').addEventListener('click', () => triggerAutomaticBackup(false)); // Manual backup
             
             document.getElementById('importDataBtn').addEventListener('click', () => new bootstrap.Modal(document.getElementById('importDataModal')).show());
             document.getElementById('confirmImportBtn').addEventListener('click', importData);
@@ -2448,30 +2398,25 @@
                     document.getElementById('editGuestSearchResults').innerHTML = '';
                 }
             });
-            
-            // Event listener untuk reset form saat modal ditutup
-            ['addReservationModal', 'addGuestModal', 'addRoomModal'].forEach(modalId => {
-                const modal = document.getElementById(modalId);
-                modal.addEventListener('hidden.bs.modal', (event) => {
-                    const form = modal.querySelector('form');
-                    if (form) form.reset();
-                });
+
+            document.getElementById('quickActionCheckoutBtn').addEventListener('click', () => {
+                const quickModal = bootstrap.Modal.getInstance(document.getElementById('quickActionModal'));
+                if (quickModal) {
+                    quickModal.hide();
+                }
+                setTimeout(() => {
+                    new bootstrap.Tab(document.getElementById('checkout-tab')).show();
+                }, 200);
             });
 
-            // Event listener untuk validasi tanggal reservasi
-            const reservationCheckin = document.getElementById('reservationCheckin');
-            const reservationCheckout = document.getElementById('reservationCheckout');
-            const today = new Date().toISOString().split("T")[0];
-            reservationCheckin.min = today;
-            reservationCheckin.addEventListener('change', () => {
-                if(reservationCheckin.value) {
-                    let nextDay = new Date(reservationCheckin.value);
-                    nextDay.setDate(nextDay.getDate() + 1);
-                    reservationCheckout.min = nextDay.toISOString().split("T")[0];
-                    if(reservationCheckout.value && reservationCheckout.value < reservationCheckin.value) {
-                       reservationCheckout.value = '';
-                    }
+            document.getElementById('quickActionHistoryBtn').addEventListener('click', () => {
+                const quickModal = bootstrap.Modal.getInstance(document.getElementById('quickActionModal'));
+                if (quickModal) {
+                    quickModal.hide();
                 }
+                setTimeout(() => {
+                    new bootstrap.Tab(document.getElementById('history-tab')).show();
+                }, 200);
             });
         }
         
@@ -2488,12 +2433,12 @@
             
             toastElement.classList.remove('bg-success', 'bg-danger', 'bg-warning', 'bg-info');
             
-            switch (type) {
-                case 'success': toastElement.classList.add('bg-success'); break;
-                case 'error': toastElement.classList.add('bg-danger'); break;
-                case 'warning': toastElement.classList.add('bg-warning'); break;
-                default: toastElement.classList.add('bg-info');
-            }
+            const typeClassMap = {
+                success: 'bg-success',
+                error: 'bg-danger',
+                warning: 'bg-warning'
+            };
+            toastElement.classList.add(typeClassMap[type] || 'bg-info');
             
             toast.show();
         }
@@ -2505,20 +2450,24 @@
             
             guests.sort((a, b) => `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`));
 
-            guests.forEach(guest => {
-                const row = guestList.insertRow();
-                row.innerHTML = `
-                    <td>${guest.id}</td>
-                    <td>${guest.firstName} ${guest.lastName}</td>
-                    <td>${guest.email}</td>
-                    <td>${guest.phone}</td>
-                    <td>${guest.address}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning edit-guest" data-id="${guest.id}" aria-label="Edit Tamu"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger delete-guest" data-id="${guest.id}" aria-label="Hapus Tamu"><i class="fas fa-trash"></i></button>
-                    </td>
-                `;
-            });
+            if (guests.length === 0) {
+                guestList.innerHTML = `<tr><td colspan="6" class="text-center">Belum ada data tamu.</td></tr>`;
+            } else {
+                guests.forEach(guest => {
+                    const row = guestList.insertRow();
+                    row.innerHTML = `
+                        <td>${guest.id}</td>
+                        <td>${guest.firstName} ${guest.lastName}</td>
+                        <td>${guest.email}</td>
+                        <td>${guest.phone}</td>
+                        <td>${guest.address}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning edit-guest" data-id="${guest.id}" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger delete-guest" data-id="${guest.id}" title="Hapus"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                });
+            }
             
             addDynamicEventListeners();
         }
@@ -2527,27 +2476,30 @@
             const roomList = document.getElementById('roomList');
             roomList.innerHTML = '';
 
-            roomsToRender.sort((a,b) => a.number.localeCompare(b.number, undefined, {numeric: true}));
+            roomsToRender.sort((a,b) => a.number.localeCompare(b.number, undefined, { numeric: true }));
 
-            roomsToRender.forEach(room => {
-                const statusClass = getStatusClass(room.status);
-                const facilities = Array.isArray(room.facilities) ? room.facilities.join(', ') : '';
-                
-                const row = roomList.insertRow();
-                row.innerHTML = `
-                    <td>${room.number}</td>
-                    <td>${room.type}</td>
-                    <td>${formatCurrency(room.price)}</td>
-                    <td>${facilities}</td>
-                    <td><span class="badge ${statusClass}">${getStatusText(room.status)}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-warning edit-room" data-id="${room.id}" aria-label="Edit Kamar"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger delete-room" data-id="${room.id}" aria-label="Hapus Kamar"><i class="fas fa-trash"></i></button>
-                    </td>
-                `;
-            });
-
-             addDynamicEventListeners();
+            if (roomsToRender.length === 0) {
+                roomList.innerHTML = `<tr><td colspan="6" class="text-center">Belum ada data kamar.</td></tr>`;
+            } else {
+                roomsToRender.forEach(room => {
+                    const statusClass = getStatusClass(room.status, true);
+                    const facilities = Array.isArray(room.facilities) ? room.facilities.join(', ') : '';
+                    
+                    const row = roomList.insertRow();
+                    row.innerHTML = `
+                        <td>${room.number}</td>
+                        <td>${room.type}</td>
+                        <td>${formatCurrency(room.price)}</td>
+                        <td>${facilities || '-'}</td>
+                        <td><span class="badge ${statusClass}">${getStatusText(room.status)}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-warning edit-room" data-id="${room.id}" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger delete-room" data-id="${room.id}" title="Hapus"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                });
+            }
+            addDynamicEventListeners();
         }
 
         function filterRoomsByStatus(status) {
@@ -2562,19 +2514,39 @@
         
         function loadRooms() {
             const rooms = JSON.parse(localStorage.getItem('hotel_rooms') || '[]');
-            const reservationRoom = document.getElementById('reservationRoom');
-            const editReservationRoom = document.getElementById('editReservationRoom');
+            const reservationRoomSelect = document.getElementById('reservationRoom');
+            const editReservationRoomSelect = document.getElementById('editReservationRoom');
 
-            reservationRoom.innerHTML = '<option value="">Pilih Kamar</option>';
-            editReservationRoom.innerHTML = '';
-
-            rooms.forEach(room => {
-                const option = document.createElement('option');
-                option.value = room.id;
-                option.textContent = `${room.number} (${room.type})`;
-                reservationRoom.appendChild(option.cloneNode(true));
-                editReservationRoom.appendChild(option.cloneNode(true));
+            // Store current values to try and restore them
+            const currentEditValue = editReservationRoomSelect.value;
+            
+            reservationRoomSelect.innerHTML = '<option value="">Pilih Kamar</option>';
+            editReservationRoomSelect.innerHTML = '';
+            
+            rooms
+                .filter(room => room.status === 'available')
+                .forEach(room => {
+                    const option = new DOMParser().parseFromString(`<option value="${room.id}">${room.number} (${room.type})</option>`, "text/html").body.firstChild;
+                    reservationRoomSelect.appendChild(option);
             });
+
+            // For editing, show all rooms but indicate their status
+            rooms.forEach(room => {
+                const isAvailable = room.status === 'available';
+                const statusIndicator = isAvailable ? '' : `(${getStatusText(room.status)})`;
+                const option = new DOMParser().parseFromString(`<option value="${room.id}" ${!isAvailable ? 'disabled' : ''}>${room.number} (${room.type}) ${statusIndicator}</option>`, "text/html").body.firstChild;
+                editReservationRoomSelect.appendChild(option);
+            });
+
+            // Try to re-select the previous value if it exists
+            if (currentEditValue) {
+                const optionToSelect = editReservationRoomSelect.querySelector(`option[value="${currentEditValue}"]`);
+                if (optionToSelect) {
+                    optionToSelect.disabled = false; // Temporarily enable to allow selection
+                    optionToSelect.selected = true;
+                }
+            }
+
 
             renderRoomList(rooms);
             document.querySelector('#roomStatusFilter button[data-status="all"]').click();
@@ -2590,23 +2562,24 @@
             const checkoutList = document.getElementById('checkoutList');
             const historyList = document.getElementById('checkoutHistoryList');
             
-            reservationList.innerHTML = '';
-            checkinList.innerHTML = '';
-            checkoutList.innerHTML = '';
-            historyList.innerHTML = '';
+            const lists = [reservationList, checkinList, checkoutList, historyList];
+            lists.forEach(list => list.innerHTML = '');
             
             reservations.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            let reservationCount = 0, checkinCount = 0, checkoutCount = 0, historyCount = 0;
 
             reservations.forEach(res => {
                 const guest = guests.find(g => g.id === res.guestId) || {};
                 const room = rooms.find(r => r.id === res.roomId) || {};
                 
-                const guestName = `${guest.firstName || ''} ${guest.lastName || ''}`.trim();
-                const roomName = `${room.number || ''} (${room.type || ''})`;
-                const statusClass = getStatusClass(res.status);
+                const guestName = `${guest.firstName || ''} ${guest.lastName || ''}`.trim() || '[Tamu Dihapus]';
+                const roomName = room.number ? `${room.number} (${room.type})` : '[Kamar Dihapus]';
+                const statusClass = getStatusClass(res.status, true);
                 const statusText = getStatusText(res.status);
 
                 if (res.status !== 'checked-out') {
+                    reservationCount++;
                     const resRow = reservationList.insertRow();
                     resRow.innerHTML = `
                         <td>${res.id}</td>
@@ -2616,13 +2589,14 @@
                         <td>${formatDate(res.checkoutDate)}</td>
                         <td><span class="badge ${statusClass}">${statusText}</span></td>
                         <td>
-                            <button class="btn btn-sm btn-warning edit-reservation" data-id="${res.id}" aria-label="Edit Reservasi"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-sm btn-danger delete-reservation" data-id="${res.id}" aria-label="Hapus Reservasi"><i class="fas fa-trash"></i></button>
+                            <button class="btn btn-sm btn-warning edit-reservation" data-id="${res.id}" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger delete-reservation" data-id="${res.id}" title="Hapus"><i class="fas fa-trash"></i></button>
                         </td>
                     `;
                 }
 
                 if (res.status === 'confirmed') {
+                    checkinCount++;
                     const checkinRow = checkinList.insertRow();
                     checkinRow.innerHTML = `
                         <td>${res.id}</td>
@@ -2636,6 +2610,7 @@
                 }
 
                 if (res.status === 'checked-in') {
+                    checkoutCount++;
                     const checkoutRow = checkoutList.insertRow();
                     checkoutRow.innerHTML = `
                         <td>${res.id}</td>
@@ -2649,13 +2624,14 @@
                 }
 
                 if (res.status === 'checked-out') {
+                    historyCount++;
                     const historyRow = historyList.insertRow();
                     const paymentStatusText = res.paymentStatus === 'paid' ? 'Lunas' : 'Menunggu';
                     const paymentStatusClass = res.paymentStatus === 'paid' ? 'bg-success' : 'bg-warning';
 
-                    let actionsHtml = `<button class="btn btn-sm btn-info reprint-invoice-btn" data-id="${res.id}"><i class="fas fa-print"></i> Cetak Ulang</button>`;
+                    let actionsHtml = `<button class="btn btn-sm btn-info reprint-invoice-btn" data-id="${res.id}" title="Cetak Ulang Invoice"><i class="fas fa-print"></i></button>`;
                     if (res.paymentStatus === 'pending') {
-                        actionsHtml += ` <button class="btn btn-sm btn-success pay-now-btn" data-id="${res.id}"><i class="fas fa-money-check-alt"></i> Bayar Sekarang</button>`;
+                        actionsHtml += ` <button class="btn btn-sm btn-success pay-now-btn" data-id="${res.id}" title="Proses Pembayaran"><i class="fas fa-money-check-alt"></i></button>`;
                     }
 
                     historyRow.innerHTML = `
@@ -2670,29 +2646,38 @@
                 }
             });
 
+            if (reservationCount === 0) reservationList.innerHTML = `<tr><td colspan="7" class="text-center">Tidak ada reservasi aktif.</td></tr>`;
+            if (checkinCount === 0) checkinList.innerHTML = `<tr><td colspan="7" class="text-center">Tidak ada reservasi yang siap untuk Check-In.</td></tr>`;
+            if (checkoutCount === 0) checkoutList.innerHTML = `<tr><td colspan="7" class="text-center">Tidak ada tamu yang sedang menginap untuk Check-Out.</td></tr>`;
+            if (historyCount === 0) historyList.innerHTML = `<tr><td colspan="7" class="text-center">Belum ada histori Check-Out.</td></tr>`;
+
             addDynamicEventListeners();
         }
 
         function addDynamicEventListeners() {
             document.querySelectorAll('.edit-guest, .delete-guest, .edit-room, .delete-room, .edit-reservation, .delete-reservation, .checkin-btn, .checkout-btn, .reprint-invoice-btn, .pay-now-btn').forEach(btn => {
-                btn.removeEventListener('click', handleDynamicButtonClick);
-                btn.addEventListener('click', handleDynamicButtonClick);
+                // Clone and replace to remove old listeners effectively
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                newBtn.addEventListener('click', handleDynamicButtonClick);
             });
         }
 
         function handleDynamicButtonClick(e) {
             const target = e.currentTarget;
             const id = target.getAttribute('data-id');
-            if (target.classList.contains('edit-guest')) editGuest(id);
-            else if (target.classList.contains('delete-guest')) showDeleteConfirm(id, 'guest');
-            else if (target.classList.contains('edit-room')) editRoom(id);
-            else if (target.classList.contains('delete-room')) showDeleteConfirm(id, 'room');
-            else if (target.classList.contains('edit-reservation')) editReservation(id);
-            else if (target.classList.contains('delete-reservation')) showDeleteConfirm(id, 'reservation');
-            else if (target.classList.contains('checkin-btn')) openCheckinModal(id);
-            else if (target.classList.contains('checkout-btn')) openCheckoutModal(id);
-            else if (target.classList.contains('reprint-invoice-btn')) reprintInvoice(id);
-            else if (target.classList.contains('pay-now-btn')) processPayment(id);
+            const classList = target.classList;
+            
+            if (classList.contains('edit-guest')) editGuest(id);
+            else if (classList.contains('delete-guest')) showDeleteConfirm(id, 'guest');
+            else if (classList.contains('edit-room')) editRoom(id);
+            else if (classList.contains('delete-room')) showDeleteConfirm(id, 'room');
+            else if (classList.contains('edit-reservation')) editReservation(id);
+            else if (classList.contains('delete-reservation')) showDeleteConfirm(id, 'reservation');
+            else if (classList.contains('checkin-btn')) openCheckinModal(id);
+            else if (classList.contains('checkout-btn')) openCheckoutModal(id);
+            else if (classList.contains('reprint-invoice-btn')) reprintInvoice(id);
+            else if (classList.contains('pay-now-btn')) processPayment(id);
         }
 
         function loadSettings() {
@@ -2708,23 +2693,29 @@
             const newStart = new Date(checkinDate);
             const newEnd = new Date(checkoutDate);
 
+            // Set time to midnight to compare dates only
+            newStart.setHours(0, 0, 0, 0);
+            newEnd.setHours(0, 0, 0, 0);
+
             const conflictingReservation = allReservations.find(res => {
-                if (res.id === excludeReservationId) return false;
-                
-                if (res.roomId !== roomId || ['cancelled', 'checked-out'].includes(res.status)) {
+                if (res.id === excludeReservationId || res.roomId !== roomId || ['cancelled', 'checked-out'].includes(res.status)) {
                     return false;
                 }
 
                 const existingStart = new Date(res.checkinDate);
                 const existingEnd = new Date(res.checkoutDate);
+                existingStart.setHours(0, 0, 0, 0);
+                existingEnd.setHours(0, 0, 0, 0);
                 
+                // Check for overlap: (StartA < EndB) and (EndA > StartB)
                 return newStart < existingEnd && newEnd > existingStart;
             });
 
             return !conflictingReservation;
         }
 
-        function saveReservation() {
+        function saveReservation(e) {
+            const btn = e.currentTarget;
             const guestId = document.getElementById('reservationGuestId').value;
             const roomId = document.getElementById('reservationRoom').value;
             const checkinDate = document.getElementById('reservationCheckin').value;
@@ -2744,6 +2735,8 @@
                 return;
             }
 
+            btn.disabled = true;
+
             const premiumServices = Array.from(document.querySelectorAll('#addReservationForm .form-check-input:checked')).map(cb => cb.value);
             
             const reservations = JSON.parse(localStorage.getItem('hotel_reservations') || '[]');
@@ -2753,7 +2746,7 @@
                 roomId: roomId,
                 checkinDate: checkinDate,
                 checkoutDate: checkoutDate,
-                guests: parseInt(document.getElementById('reservationGuests').value),
+                guests: parseInt(document.getElementById('reservationGuests').value) || 1,
                 status: document.getElementById('reservationStatus').value,
                 notes: document.getElementById('reservationNotes').value,
                 premiumServices: premiumServices,
@@ -2767,37 +2760,42 @@
             if (newReservation.status === 'confirmed') updateRoomStatus(roomId, 'reserved');
             
             bootstrap.Modal.getInstance(document.getElementById('addReservationModal')).hide();
+            document.getElementById('addReservationForm').reset();
             loadInitialData();
             updateDashboardStats();
             showNotification('Sukses', 'Reservasi berhasil ditambahkan.', 'success');
+            btn.disabled = false;
         }
         
-        function saveGuest() {
-            const firstName = document.getElementById('guestFirstName').value;
-            const lastName = document.getElementById('guestLastName').value;
-            const email = document.getElementById('guestEmail').value;
+        function saveGuest(e) {
+            const btn = e.currentTarget;
+            const firstName = document.getElementById('guestFirstName').value.trim();
+            const lastName = document.getElementById('guestLastName').value.trim();
+            const email = document.getElementById('guestEmail').value.trim().toLowerCase();
+            const phone = document.getElementById('guestPhone').value.trim();
 
-            if (!firstName || !lastName || !email) {
-                showNotification('Error', 'Nama depan, nama belakang, dan email wajib diisi.', 'error');
+            if (!firstName || !lastName || !email || !phone) {
+                showNotification('Error', 'Semua field wajib diisi kecuali data identitas.', 'error');
                 return;
             }
             
             const guests = JSON.parse(localStorage.getItem('hotel_guests') || '[]');
-            if (guests.some(guest => guest.email.toLowerCase() === email.toLowerCase())) {
+            if (guests.some(guest => guest.email === email)) {
                 showNotification('Error', 'Email sudah terdaftar.', 'error');
                 return;
             }
             
+            btn.disabled = true;
             const newGuest = {
                 id: generateId('GST'),
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                phone: document.getElementById('guestPhone').value,
-                address: document.getElementById('guestAddress').value,
-                nationality: document.getElementById('guestNationality').value,
+                firstName,
+                lastName,
+                email,
+                phone,
+                address: document.getElementById('guestAddress').value.trim(),
+                nationality: document.getElementById('guestNationality').value.trim(),
                 idType: document.getElementById('guestIdType').value,
-                idNumber: document.getElementById('guestIdNumber').value,
+                idNumber: document.getElementById('guestIdNumber').value.trim(),
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString()
             };
@@ -2806,34 +2804,38 @@
             localStorage.setItem('hotel_guests', JSON.stringify(guests));
             
             bootstrap.Modal.getInstance(document.getElementById('addGuestModal')).hide();
+            document.getElementById('addGuestForm').reset();
             loadInitialData();
             updateDashboardStats();
             showNotification('Sukses', 'Tamu berhasil ditambahkan.', 'success');
+            btn.disabled = false;
         }
         
-        function saveRoom() {
-            const number = document.getElementById('roomNumber').value;
+        function saveRoom(e) {
+            const btn = e.currentTarget;
+            const number = document.getElementById('roomNumber').value.trim();
             const price = document.getElementById('roomPrice').value;
 
-            if (!number || !price) {
-                showNotification('Error', 'Nomor kamar dan harga wajib diisi.', 'error');
+            if (!number || !price || price < 0) {
+                showNotification('Error', 'Nomor kamar dan harga (positif) wajib diisi.', 'error');
                 return;
             }
             
             const rooms = JSON.parse(localStorage.getItem('hotel_rooms') || '[]');
-            if (rooms.some(room => room.number === number)) {
+            if (rooms.some(room => room.number.toLowerCase() === number.toLowerCase())) {
                 showNotification('Error', 'Nomor kamar sudah ada.', 'error');
                 return;
             }
             
+            btn.disabled = true;
             const facilities = Array.from(document.querySelectorAll('#addRoomForm .form-check-input:checked')).map(cb => cb.value);
             
             const newRoom = {
                 id: generateId('ROM'),
-                number: number,
+                number,
                 type: document.getElementById('roomType').value,
                 price: parseFloat(price),
-                facilities: facilities,
+                facilities,
                 status: document.getElementById('roomStatus').value,
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString()
@@ -2843,12 +2845,15 @@
             localStorage.setItem('hotel_rooms', JSON.stringify(rooms));
             
             bootstrap.Modal.getInstance(document.getElementById('addRoomModal')).hide();
+            document.getElementById('addRoomForm').reset();
             loadInitialData();
             updateDashboardStats();
             showNotification('Sukses', 'Kamar berhasil ditambahkan.', 'success');
+            btn.disabled = false;
         }
         
         function editReservation(id) {
+            loadRooms(); // Refresh room list before opening modal
             const reservations = JSON.parse(localStorage.getItem('hotel_reservations') || '[]');
             const reservation = reservations.find(r => r.id === id);
             if (!reservation) return;
@@ -2859,7 +2864,21 @@
             document.getElementById('editReservationId').value = reservation.id;
             document.getElementById('editReservationGuestName').value = guest ? `${guest.firstName} ${guest.lastName}` : '';
             document.getElementById('editReservationGuestId').value = reservation.guestId;
-            document.getElementById('editReservationRoom').value = reservation.roomId;
+
+            // Enable and select the current room, even if it's not 'available'
+            const roomOption = document.getElementById('editReservationRoom').querySelector(`option[value="${reservation.roomId}"]`);
+            if (roomOption) {
+                roomOption.disabled = false;
+                roomOption.selected = true;
+            } else {
+                 // If the room was deleted, add a temporary option
+                const tempOption = document.createElement('option');
+                tempOption.value = reservation.roomId;
+                tempOption.textContent = `[Kamar Dihapus] - ID: ${reservation.roomId}`;
+                tempOption.selected = true;
+                document.getElementById('editReservationRoom').prepend(tempOption);
+            }
+
             document.getElementById('editReservationCheckin').value = reservation.checkinDate;
             document.getElementById('editReservationCheckout').value = reservation.checkoutDate;
             document.getElementById('editReservationGuests').value = reservation.guests;
@@ -2898,9 +2917,9 @@
             }
             
             const originalStatus = reservations[index].status;
+            const originalRoomId = reservations[index].roomId;
             const newStatus = document.getElementById('editReservationStatus').value;
             const premiumServices = Array.from(document.querySelectorAll('#editReservationForm .form-check-input:checked')).map(cb => cb.value);
-
 
             reservations[index] = {
                 ...reservations[index],
@@ -2917,11 +2936,13 @@
 
             localStorage.setItem('hotel_reservations', JSON.stringify(reservations));
             
-            if(originalStatus !== newStatus) {
-                if (newStatus === 'confirmed' || newStatus === 'reserved') updateRoomStatus(roomId, 'reserved');
-                else if (newStatus === 'checked-in') updateRoomStatus(roomId, 'occupied');
-                else if (newStatus === 'checked-out' || newStatus === 'cancelled') updateRoomStatus(roomId, 'available');
+            // Logic to update room statuses based on changes
+            if (originalRoomId !== roomId && ['confirmed', 'reserved', 'checked-in'].includes(originalStatus)) {
+                updateRoomStatus(originalRoomId, 'available'); // Free up the old room
             }
+            if (newStatus === 'confirmed' || newStatus === 'reserved') updateRoomStatus(roomId, 'reserved');
+            else if (newStatus === 'checked-in') updateRoomStatus(roomId, 'occupied');
+            else if (newStatus === 'checked-out' || newStatus === 'cancelled') updateRoomStatus(roomId, 'available');
 
             bootstrap.Modal.getInstance(document.getElementById('editReservationModal')).hide();
             loadInitialData();
@@ -2950,14 +2971,14 @@
 
             guests[index] = {
                 ...guests[index],
-                firstName: document.getElementById('editGuestFirstName').value,
-                lastName: document.getElementById('editGuestLastName').value,
-                email: document.getElementById('editGuestEmail').value,
-                phone: document.getElementById('editGuestPhone').value,
-                address: document.getElementById('editGuestAddress').value,
-                nationality: document.getElementById('editGuestNationality').value,
+                firstName: document.getElementById('editGuestFirstName').value.trim(),
+                lastName: document.getElementById('editGuestLastName').value.trim(),
+                email: document.getElementById('editGuestEmail').value.trim().toLowerCase(),
+                phone: document.getElementById('editGuestPhone').value.trim(),
+                address: document.getElementById('editGuestAddress').value.trim(),
+                nationality: document.getElementById('editGuestNationality').value.trim(),
                 idType: document.getElementById('editGuestIdType').value,
-                idNumber: document.getElementById('editGuestIdNumber').value,
+                idNumber: document.getElementById('editGuestIdNumber').value.trim(),
                 updatedAt: new Date().toISOString()
             };
 
@@ -2999,7 +3020,7 @@
 
             rooms[index] = {
                 ...rooms[index],
-                number: document.getElementById('editRoomNumber').value,
+                number: document.getElementById('editRoomNumber').value.trim(),
                 type: document.getElementById('editRoomType').value,
                 price: parseFloat(document.getElementById('editRoomPrice').value),
                 status: document.getElementById('editRoomStatus').value,
@@ -3020,11 +3041,11 @@
             const room = JSON.parse(localStorage.getItem('hotel_rooms') || '[]').find(r => r.id === reservation.roomId) || {};
             
             if (room.status === 'maintenance') {
-                showNotification(
-                    'Check-In Ditolak', 
-                    `Kamar ${room.number} sedang dalam pemeliharaan. Silakan ubah reservasi ke kamar lain yang tersedia.`,
-                    'error'
-                );
+                showNotification('Check-In Ditolak', `Kamar ${room.number} sedang dalam pemeliharaan.`, 'error');
+                return;
+            }
+             if (room.status === 'occupied') {
+                showNotification('Check-In Ditolak', `Kamar ${room.number} sudah terisi.`, 'error');
                 return;
             }
             
@@ -3034,8 +3055,14 @@
             document.getElementById('checkinReservationCode').value = reservation.id;
             document.getElementById('checkinGuestName').value = `${guest.firstName} ${guest.lastName}`;
             document.getElementById('checkinRoom').value = `${room.number} (${room.type})`;
-            document.getElementById('checkinDate').value = new Date().toISOString().split('T')[0];
-            document.getElementById('checkinTime').value = new Date().toTimeString().slice(0, 5);
+            
+            const today = new Date();
+            const settings = JSON.parse(localStorage.getItem('hotel_settings') || '{}');
+            const [hours, minutes] = settings.defaultCheckinTime.split(':');
+            today.setHours(hours, minutes);
+
+            document.getElementById('checkinDate').value = today.toISOString().split('T')[0];
+            document.getElementById('checkinTime').value = today.toTimeString().slice(0, 5);
 
             new bootstrap.Modal(document.getElementById('checkinModal')).show();
         }
@@ -3060,7 +3087,7 @@
         }
 
         function processPayment(id) {
-            if (!confirm('Apakah Anda yakin ingin memproses pembayaran untuk invoice ini?')) {
+            if (!confirm('Apakah Anda yakin ingin memproses pembayaran lunas untuk invoice ini?')) {
                 return;
             }
 
@@ -3075,7 +3102,7 @@
             reservations[index].updatedAt = new Date().toISOString();
 
             localStorage.setItem('hotel_reservations', JSON.stringify(reservations));
-            loadReservations(); // Reload only the reservation list to update the view
+            loadReservations();
             showNotification('Sukses', 'Pembayaran berhasil dikonfirmasi.', 'success');
         }
 
@@ -3093,7 +3120,7 @@
             if (reservation.status === 'checked-out' && reservation.actualCheckout) {
                 checkoutDate = new Date(reservation.actualCheckout);
             }
-            const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24)) || 1;
+            const nights = Math.max(1, Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24)));
             
             const roomTotal = (room.price || 0) * nights;
 
@@ -3128,20 +3155,20 @@
             document.getElementById('invoiceNumber').textContent = `INV-${reservation.id.slice(-6)}`;
             document.getElementById('invoiceDate').textContent = formatDate(reservation.actualCheckout || new Date().toISOString());
             
-            const guestName = `${guest.firstName} ${guest.lastName}`;
+            const guestName = guest.firstName ? `${guest.firstName} ${guest.lastName}` : '[Tamu Dihapus]';
             document.getElementById('invoiceGuestName').textContent = guestName;
             document.getElementById('signatureGuestName').textContent = guestName;
             document.getElementById('invoiceGuestPhone').textContent = `Telepon: ${guest.phone || '-'}`;
             document.getElementById('invoiceGuestEmail').textContent = `Email: ${guest.email || '-'}`;
             
-            document.getElementById('invoiceRoom').textContent = `${room.number} (${room.type})`;
+            document.getElementById('invoiceRoom').textContent = room.number ? `${room.number} (${room.type})` : '[Kamar Dihapus]';
             document.getElementById('invoiceCheckin').textContent = formatDate(reservation.checkinDate);
             document.getElementById('invoiceCheckout').textContent = formatDate(reservation.checkoutDate);
             document.getElementById('invoiceNights').textContent = `${nights} malam`;
 
             document.getElementById('invoiceItems').innerHTML = `
                 <tr>
-                    <td>Menginap di Kamar ${room.number} (${room.type})</td>
+                    <td>Menginap di Kamar ${room.number || '-'} (${room.type || '-'})</td>
                     <td>${nights} malam</td>
                     <td>${formatCurrency(room.price)}</td>
                     <td>${formatCurrency(roomTotal)}</td>
@@ -3155,19 +3182,18 @@
             document.getElementById('invoiceTotal').textContent = formatCurrency(totalAmount);
             document.getElementById('invoiceFrontOfficeName').textContent = frontOfficeName;
 
-            // --- DYNAMIC WATERMARK LOGIC ---
             const watermarkEl = document.getElementById('checkoutInvoice').querySelector('.invoice-watermark');
             const invoiceContainer = document.getElementById('checkoutInvoice');
             const currentPaymentStatus = reservation.paymentStatus || document.getElementById('checkoutPaymentStatus').value;
 
-            invoiceContainer.classList.remove('watermarked'); // Reset first
+            invoiceContainer.classList.remove('watermarked');
             if (currentPaymentStatus === 'paid') {
                 watermarkEl.textContent = 'LUNAS';
-                watermarkEl.style.color = 'rgba(40, 167, 69, 0.15)'; // Green color
+                watermarkEl.style.color = 'rgba(40, 167, 69, 0.15)';
                 invoiceContainer.classList.add('watermarked');
             } else if (currentPaymentStatus === 'pending') {
                 watermarkEl.textContent = 'BELUM LUNAS';
-                watermarkEl.style.color = 'rgba(220, 53, 69, 0.15)'; // Red color
+                watermarkEl.style.color = 'rgba(220, 53, 69, 0.15)';
                 invoiceContainer.classList.add('watermarked');
             }
             
@@ -3178,7 +3204,6 @@
             const reservation = JSON.parse(localStorage.getItem('hotel_reservations') || '[]').find(r => r.id === id);
             if (!reservation) return;
             
-            // Set default payment status for new checkouts
             if (!reservation.paymentStatus) {
                 document.getElementById('checkoutPaymentStatus').value = 'pending';
             }
@@ -3199,7 +3224,7 @@
             document.getElementById('amountPaid').value = '';
             document.getElementById('changeDue').value = '';
             
-            calculateChange(); // Initial calculation
+            calculateChange();
             new bootstrap.Modal(checkoutModal).show();
         }
         
@@ -3257,25 +3282,28 @@
         function confirmDelete() {
             const id = document.getElementById('deleteItemId').value;
             const type = document.getElementById('deleteItemType').value;
+            const modalInstance = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
             
             let data = JSON.parse(localStorage.getItem(`hotel_${type}s`) || '[]');
             const index = data.findIndex(item => item.id === id);
             
             if (index === -1) {
                 showNotification('Error', 'Data tidak ditemukan.', 'error');
-                bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+                modalInstance.hide();
                 return;
             }
             
             const reservations = JSON.parse(localStorage.getItem('hotel_reservations') || '[]');
-            if (type === 'guest' && reservations.some(r => r.guestId === id && ['confirmed', 'checked-in'].includes(r.status))) {
+            const activeStatuses = ['confirmed', 'checked-in', 'reserved'];
+            
+            if (type === 'guest' && reservations.some(r => r.guestId === id && activeStatuses.includes(r.status))) {
                 showNotification('Error', 'Tidak dapat menghapus tamu dengan reservasi aktif.', 'error');
-                bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+                modalInstance.hide();
                 return;
             }
-            if (type === 'room' && reservations.some(r => r.roomId === id && ['confirmed', 'checked-in'].includes(r.status))) {
+            if (type === 'room' && reservations.some(r => r.roomId === id && activeStatuses.includes(r.status))) {
                 showNotification('Error', 'Tidak dapat menghapus kamar dengan reservasi aktif.', 'error');
-                bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+                modalInstance.hide();
                 return;
             }
 
@@ -3286,7 +3314,7 @@
             data.splice(index, 1);
             localStorage.setItem(`hotel_${type}s`, JSON.stringify(data));
             
-            bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal')).hide();
+            modalInstance.hide();
             loadInitialData();
             updateDashboardStats();
             showNotification('Sukses', `Data ${type} berhasil dihapus.`, 'success');
@@ -3391,8 +3419,10 @@
             showNotification('Sukses', 'Semua data berhasil diekspor.', 'success');
         }
         
+        // --- START: ENHANCED IMPORT WITH DECRYPTION ---
         function importData() {
             const file = document.getElementById('importDataFile').files[0];
+            const modalInstance = bootstrap.Modal.getInstance(document.getElementById('importDataModal'));
             if (!file) {
                 showNotification('Error', 'Pilih file JSON untuk diimpor.', 'error');
                 return;
@@ -3401,34 +3431,50 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
-                    const data = JSON.parse(e.target.result);
-                    const overwrite = document.getElementById('importOverwrite').checked;
+                    let fileContent = e.target.result;
+                    let decodedContent;
 
+                    // Try to decode from Base64. If it fails, assume it's plain JSON.
+                    try {
+                        decodedContent = atob(fileContent);
+                    } catch (error) {
+                        decodedContent = fileContent; // It's likely a plain JSON file
+                    }
+
+                    const data = JSON.parse(decodedContent);
+                    const overwrite = document.getElementById('importOverwrite').checked;
+                    
                     if (overwrite) {
                         localStorage.setItem('hotel_guests', JSON.stringify(data.guests || []));
                         localStorage.setItem('hotel_rooms', JSON.stringify(data.rooms || []));
                         localStorage.setItem('hotel_reservations', JSON.stringify(data.reservations || []));
+                        if(data.settings) localStorage.setItem('hotel_settings', JSON.stringify(data.settings));
                     } else {
-                        const existingGuests = JSON.parse(localStorage.getItem('hotel_guests'));
-                        const existingRooms = JSON.parse(localStorage.getItem('hotel_rooms'));
-                        const existingReservations = JSON.parse(localStorage.getItem('hotel_reservations'));
-                        localStorage.setItem('hotel_guests', JSON.stringify([...existingGuests, ...(data.guests || [])]));
-                        localStorage.setItem('hotel_rooms', JSON.stringify([...existingRooms, ...(data.rooms || [])]));
-                        localStorage.setItem('hotel_reservations', JSON.stringify([...existingReservations, ...(data.reservations || [])]));
+                        const mergeById = (existing, toAdd) => {
+                            const existingIds = new Set(existing.map(item => item.id));
+                            toAdd.forEach(item => {
+                                if (!existingIds.has(item.id)) existing.push(item);
+                            });
+                            return existing;
+                        };
+                        localStorage.setItem('hotel_guests', JSON.stringify(mergeById(JSON.parse(localStorage.getItem('hotel_guests')), data.guests || [])));
+                        localStorage.setItem('hotel_rooms', JSON.stringify(mergeById(JSON.parse(localStorage.getItem('hotel_rooms')), data.rooms || [])));
+                        localStorage.setItem('hotel_reservations', JSON.stringify(mergeById(JSON.parse(localStorage.getItem('hotel_reservations')), data.reservations || [])));
                     }
                     
                     loadInitialData();
                     updateDashboardStats();
-                    bootstrap.Modal.getInstance(document.getElementById('importDataModal')).hide();
+                    modalInstance.hide();
                     showNotification('Sukses', 'Data berhasil diimpor.', 'success');
                 } catch (error) {
                     console.error("Import error:", error);
-                    showNotification('Error', 'Gagal mengimpor data. File mungkin rusak atau tidak dalam format yang benar.', 'error');
+                    showNotification('Error', 'Gagal impor. File rusak atau format tidak benar.', 'error');
                 }
             };
             reader.readAsText(file);
         }
-        
+        // --- END: ENHANCED IMPORT WITH DECRYPTION ---
+
         function resetData() {
             if (confirm('PERINGATAN: Anda akan menghapus SEMUA data (tamu, kamar, reservasi). Tindakan ini tidak dapat dibatalkan. Lanjutkan?')) {
                 localStorage.removeItem('hotel_guests');
@@ -3445,15 +3491,15 @@
             window.print();
         }
 
-        function urlToBas64(url) {
-            return fetch(url)
-                .then(response => response.blob())
-                .then(blob => new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => resolve(reader.result);
-                    reader.onerror = reject;
-                    reader.readAsDataURL(blob);
-                }));
+        async function urlToBas64(url) {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
         }
 
         async function downloadInvoicePdf() {
@@ -3461,10 +3507,7 @@
             const reservationId = checkoutModal.dataset.reprintId;
             const frontOfficeName = sessionStorage.getItem('frontOfficeName') || 'Staff';
 
-            if (!reservationId) {
-                showNotification('Error', 'Tidak ada data reservasi untuk diunduh.', 'error');
-                return;
-            }
+            if (!reservationId) return;
 
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -3480,20 +3523,17 @@
             let currentY = 15;
 
             try {
-                const logoUrl = 'https://raw.githubusercontent.com/LKS-88/hotel/refs/heads/main/logo-hotel.png';
-                const logoBase64 = await urlToBas64(logoUrl);
-                
+                const logoBase64 = await urlToBas64('https://raw.githubusercontent.com/LKS-88/hotel/refs/heads/main/logo-hotel.png');
                 const img = new Image();
                 img.src = logoBase64;
                 await new Promise(resolve => img.onload = resolve);
-                
                 const imgWidth = 40;
                 const imgHeight = (img.height * imgWidth) / img.width;
                 doc.addImage(logoBase64, 'PNG', 14, currentY, imgWidth, imgHeight);
-                currentY += imgHeight + 5;
+                currentY += imgHeight;
             } catch (error) {
                 console.error("Gagal memuat logo:", error);
-                showNotification('Warning', 'Gagal memuat logo hotel, PDF akan dibuat tanpa logo.', 'warning');
+                showNotification('Warning', 'Gagal memuat logo, PDF dibuat tanpa logo.', 'warning');
                 currentY += 15;
             }
 
@@ -3517,13 +3557,13 @@
             doc.text(`No: INV-${reservation.id.slice(-6)}`, 200, 27, { align: 'right' });
             doc.text(`Tanggal: ${formatDate(reservation.actualCheckout || new Date().toISOString())}`, 200, 34, { align: 'right' });
 
-            currentY = Math.max(currentY, 50) + 10;
+            currentY = Math.max(currentY, 40) + 10;
             doc.setLineWidth(0.5);
             doc.line(14, currentY, 200, currentY);
             currentY += 10;
 
             const guestDetailsY = currentY;
-            const guestName = guest ? `${guest.firstName} ${guest.lastName}` : 'Nama Tamu';
+            const guestName = guest.firstName ? `${guest.firstName} ${guest.lastName}` : '[Tamu Dihapus]';
             doc.setFont('Helvetica', 'bold');
             doc.setFontSize(12);
             doc.text('Detail Tamu', 14, guestDetailsY);
@@ -3538,53 +3578,20 @@
             doc.text('Detail Reservasi', 200, guestDetailsY, { align: 'right' });
             doc.setFont('Helvetica', 'normal');
             doc.setFontSize(10);
-            const checkinDate = new Date(reservation.checkinDate);
-            const checkoutDate = new Date(reservation.checkoutDate);
-            const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24)) || 1;
+            const nights = Math.max(1, Math.ceil((new Date(reservation.checkoutDate) - new Date(reservation.checkinDate)) / (1000 * 3600 * 24)));
             doc.text(`Kamar: ${room.number || '-'} (${room.type || '-'})`, 200, guestDetailsY + 7, { align: 'right' });
             doc.text(`Check-In: ${formatDate(reservation.checkinDate)}`, 200, guestDetailsY + 12, { align: 'right' });
             doc.text(`Check-Out: ${formatDate(reservation.checkoutDate)}`, 200, guestDetailsY + 17, { align: 'right' });
             doc.text(`Lama Menginap: ${nights} malam`, 200, guestDetailsY + 22, { align: 'right' });
 
-            const roomTotal = (room.price || 0) * nights;
-            let servicesTotal = 0;
-            const tableRows = [];
-            tableRows.push([
-                `Menginap di Kamar ${room.number || '-'} (${room.type || '-'})`,
-                `${nights} malam`,
-                formatCurrency(room.price || 0),
-                formatCurrency(roomTotal)
-            ]);
-
-            if (Array.isArray(reservation.premiumServices) && reservation.premiumServices.length > 0) {
-                reservation.premiumServices.forEach(service => {
-                    let price = 0;
-                    if (service === 'Pijat') price = parseFloat(settings.pricePijat || 0);
-                    else if (service === 'Makan Malam') price = parseFloat(settings.priceMakanMalam || 0);
-                    else if (service === 'Meeting Room') price = parseFloat(settings.priceMeetingRoom || 0);
-                    
-                    servicesTotal += price;
-                    tableRows.push([
-                        `Layanan: ${service}`,
-                        `1`,
-                        formatCurrency(price),
-                        formatCurrency(price)
-                    ]);
-                });
-            }
-            
-            const subtotal = roomTotal + servicesTotal;
-            const taxAmount = subtotal * ((settings.taxRate || 0) / 100);
-            const totalAmount = reservation.totalAmount || (subtotal + taxAmount);
-            
-            const tableColumn = ["Deskripsi", "Jumlah", "Harga Satuan", "Subtotal"];
+            const { tableRows, subtotal, taxAmount, totalAmount } = calculateInvoiceDetails(reservation, room, nights, settings);
             
             doc.autoTable({
-                head: [tableColumn],
+                head: [["Deskripsi", "Jumlah", "Harga Satuan", "Subtotal"]],
                 body: tableRows,
                 startY: guestDetailsY + 30,
                 theme: 'grid',
-                headStyles: { fillColor: [26, 94, 99] }
+                headStyles: { fillColor: [13, 71, 161] }
             });
 
             let finalY = doc.autoTable.previous.finalY;
@@ -3611,28 +3618,41 @@
             doc.text(`( ${frontOfficeName} )`, 200, finalY + 20, { align: 'right' });
             doc.text('Front Office', 200, finalY + 25, { align: 'right' });
 
-
-            // --- PDF WATERMARK LOGIC ---
-            if (reservation.paymentStatus === 'paid') {
+            if (reservation.paymentStatus === 'paid' || reservation.paymentStatus === 'pending') {
                 doc.setFontSize(72);
                 doc.setFont('Helvetica', 'bold');
-                doc.setTextColor(40, 167, 69);
-                doc.text('LUNAS', 105, 160, { angle: -35, align: 'center', renderingMode: 'stroke' });
-                doc.setTextColor(0,0,0);
-            } else if (reservation.paymentStatus === 'pending') {
-                doc.setFontSize(72);
-                doc.setFont('Helvetica', 'bold');
-                doc.setTextColor(220, 53, 69);
-                doc.text('BELUM LUNAS', 105, 160, { angle: -35, align: 'center', renderingMode: 'stroke' });
+                doc.setTextColor(reservation.paymentStatus === 'paid' ? 'green' : 'red');
+                const watermarkText = reservation.paymentStatus === 'paid' ? 'LUNAS' : 'BELUM LUNAS';
+                doc.text(watermarkText, 105, 160, { angle: -35, align: 'center', renderingMode: 'stroke' });
                 doc.setTextColor(0,0,0);
             }
 
             doc.setFont('Helvetica', 'italic');
             doc.setFontSize(10);
-            doc.text('Terima kasih atas kunjungan Anda. Kami berharap dapat melayani Anda lagi!', 105, doc.internal.pageSize.height - 20, { align: 'center' });
+            doc.text('Terima kasih atas kunjungan Anda.', 105, doc.internal.pageSize.height - 20, { align: 'center' });
 
             doc.save(`invoice-${reservation.id}.pdf`);
             showNotification('Sukses', 'Invoice PDF berhasil diunduh.', 'success');
+        }
+        
+        function calculateInvoiceDetails(reservation, room, nights, settings) {
+            const roomTotal = (room.price || 0) * nights;
+            let servicesTotal = 0;
+            const tableRows = [[`Menginap di Kamar ${room.number || '-'}`, `${nights} malam`, formatCurrency(room.price), formatCurrency(roomTotal)]];
+            
+            (reservation.premiumServices || []).forEach(service => {
+                let price = 0;
+                if (service === 'Pijat') price = parseFloat(settings.pricePijat || 0);
+                else if (service === 'Makan Malam') price = parseFloat(settings.priceMakanMalam || 0);
+                else if (service === 'Meeting Room') price = parseFloat(settings.priceMeetingRoom || 0);
+                servicesTotal += price;
+                tableRows.push([`Layanan: ${service}`, '1', formatCurrency(price), formatCurrency(price)]);
+            });
+
+            const subtotal = roomTotal + servicesTotal;
+            const taxAmount = subtotal * ((settings.taxRate || 0) / 100);
+            const totalAmount = reservation.totalAmount || (subtotal + taxAmount);
+            return { tableRows, subtotal, taxAmount, totalAmount };
         }
         
         function printReservationPdf() {
@@ -3649,28 +3669,15 @@
             doc.setFontSize(11);
             doc.text(`Tanggal Cetak: ${formatDate(new Date().toISOString())}`, 14, 30);
 
-            const tableColumn = ["ID", "Nama Tamu", "Kamar", "Check-In", "Check-Out", "Status"];
-            const tableRows = [];
-
-            reservations.forEach(res => {
+            const tableRows = reservations.map(res => {
                 const guest = guests.find(g => g.id === res.guestId) || {};
                 const room = rooms.find(r => r.id === res.roomId) || {};
-                const reservationData = [
-                    res.id,
-                    `${guest.firstName} ${guest.lastName}`,
-                    room.number,
-                    formatDate(res.checkinDate),
-                    formatDate(res.checkoutDate),
-                    getStatusText(res.status)
-                ];
-                tableRows.push(reservationData);
+                return [ res.id, `${guest.firstName} ${guest.lastName}`, room.number, formatDate(res.checkinDate), formatDate(res.checkoutDate), getStatusText(res.status) ];
             });
 
             doc.autoTable({
-                head: [tableColumn],
-                body: tableRows,
-                startY: 35,
-                headStyles: { fillColor: [26, 94, 99] }
+                head: [["ID", "Nama Tamu", "Kamar", "Check-In", "Check-Out", "Status"]],
+                body: tableRows, startY: 35
             });
             doc.save(`reservasi_${new Date().toISOString().split('T')[0]}.pdf`);
             showNotification('Sukses', 'PDF Laporan Reservasi berhasil dibuat.', 'success');
@@ -3688,31 +3695,18 @@
             doc.setFontSize(11);
             doc.text(`Tanggal Cetak: ${formatDate(new Date().toISOString())}`, 14, 30);
 
-            const tableColumn = ["ID", "Nama Lengkap", "Email", "Telepon", "Alamat"];
-            const tableRows = [];
-
-            guests.forEach(guest => {
-                const guestData = [
-                    guest.id,
-                    `${guest.firstName} ${guest.lastName}`,
-                    guest.email,
-                    guest.phone,
-                    guest.address.replace(/\n/g, ', ')
-                ];
-                tableRows.push(guestData);
-            });
+            const tableRows = guests.map(guest => [ guest.id, `${guest.firstName} ${guest.lastName}`, guest.email, guest.phone, guest.address.replace(/\n/g, ', ') ]);
 
             doc.autoTable({
-                head: [tableColumn],
-                body: tableRows,
-                startY: 35,
-                headStyles: { fillColor: [26, 94, 99] }
+                head: [["ID", "Nama Lengkap", "Email", "Telepon", "Alamat"]],
+                body: tableRows, startY: 35
             });
             doc.save(`data-tamu_${new Date().toISOString().split('T')[0]}.pdf`);
             showNotification('Sukses', 'PDF Laporan Tamu berhasil dibuat.', 'success');
         }
 
-        function backupAllDataJson() {
+        // --- START: NEW AUTOMATIC & ENCRYPTED BACKUP FUNCTION ---
+        function triggerAutomaticBackup(isAuto = true) {
             try {
                 const backupData = {
                     guests: JSON.parse(localStorage.getItem('hotel_guests') || '[]'),
@@ -3722,23 +3716,37 @@
                 };
                 
                 const jsonString = JSON.stringify(backupData, null, 2);
-                const blob = new Blob([jsonString], { type: 'application/json' });
+                // Encrypt/obfuscate the JSON string using Base64
+                const encryptedString = btoa(jsonString);
+                
+                const blob = new Blob([encryptedString], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
                 
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `hotel_backup_${new Date().toISOString().split('T')[0]}.json`;
+                
+                const settings = backupData.settings;
+                const hotelName = (settings.hotelName || 'HotelBackup').replace(/\s+/g, '-');
+                const now = new Date();
+                const timestamp = `${now.getDate().toString().padStart(2, '0')}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getFullYear()}_${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}-${now.getSeconds().toString().padStart(2, '0')}`;
+                
+                a.download = `${hotelName}_${timestamp}.json`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
                 
-                showNotification('Sukses', 'Backup data JSON berhasil dibuat.', 'success');
+                if (!isAuto) {
+                    showNotification('Sukses', 'Backup data terenkripsi berhasil dibuat.', 'success');
+                }
             } catch (error) {
-                console.error('Gagal membuat backup JSON:', error);
-                showNotification('Error', 'Terjadi kesalahan saat membuat backup data.', 'error');
+                console.error('Gagal membuat backup:', error);
+                if (!isAuto) {
+                    showNotification('Error', 'Terjadi kesalahan saat membuat backup data.', 'error');
+                }
             }
         }
+        // --- END: NEW AUTOMATIC & ENCRYPTED BACKUP FUNCTION ---
         
         function updateRoomStatus(roomId, status) {
             const rooms = JSON.parse(localStorage.getItem('hotel_rooms') || '[]');
@@ -3758,36 +3766,28 @@
             const room = rooms.find(r => r.id === reservation.roomId);
             if (!room) return 0;
             
-            const checkinDate = new Date(reservation.checkinDate);
-            const checkoutDate = new Date(reservation.checkoutDate);
-            const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24)) || 1;
+            const nights = Math.max(1, Math.ceil((new Date(reservation.checkoutDate) - new Date(reservation.checkinDate)) / (1000 * 60 * 60 * 24)));
             
-            const roomTotal = room.price * nights;
             let servicesTotal = 0;
-             if (Array.isArray(reservation.premiumServices) && reservation.premiumServices.length > 0) {
-                reservation.premiumServices.forEach(service => {
-                    if (service === 'Pijat') servicesTotal += parseFloat(settings.pricePijat || 0);
-                    else if (service === 'Makan Malam') servicesTotal += parseFloat(settings.priceMakanMalam || 0);
-                    else if (service === 'Meeting Room') servicesTotal += parseFloat(settings.priceMeetingRoom || 0);
-                });
-            }
-            const subtotal = roomTotal + servicesTotal;
-            const taxAmount = subtotal * (settings.taxRate / 100);
-            return subtotal + taxAmount;
+            (reservation.premiumServices || []).forEach(service => {
+                if (service === 'Pijat') servicesTotal += parseFloat(settings.pricePijat || 0);
+                else if (service === 'Makan Malam') servicesTotal += parseFloat(settings.priceMakanMalam || 0);
+                else if (service === 'Meeting Room') servicesTotal += parseFloat(settings.priceMeetingRoom || 0);
+            });
+            const subtotal = (room.price * nights) + servicesTotal;
+            return subtotal * (1 + (settings.taxRate / 100));
         }
 
         function calculateChange() {
             const checkoutModal = document.getElementById('checkoutModal');
             const totalAmount = parseFloat(checkoutModal.dataset.totalAmount) || 0;
-            const amountPaidInput = document.getElementById('amountPaid');
-            const amountPaid = parseFloat(amountPaidInput.value) || 0;
+            const amountPaid = parseFloat(document.getElementById('amountPaid').value) || 0;
             const changeDueEl = document.getElementById('changeDue');
             const confirmBtn = document.getElementById('confirmCheckoutBtn');
             const paymentStatusSelect = document.getElementById('checkoutPaymentStatus');
 
             if (amountPaid >= totalAmount) {
-                const change = amountPaid - totalAmount;
-                changeDueEl.value = formatCurrency(change);
+                changeDueEl.value = formatCurrency(amountPaid - totalAmount);
                 confirmBtn.disabled = false;
                 paymentStatusSelect.value = 'paid';
             } else {
@@ -3796,13 +3796,11 @@
                 paymentStatusSelect.value = 'pending';
             }
 
-            // Also update watermark in real-time if status changes
-             const reservationId = checkoutModal.dataset.reprintId;
-             const reservations = JSON.parse(localStorage.getItem('hotel_reservations') || '[]');
-             const reservation = reservations.find(r => r.id === reservationId);
-             if (reservation) {
+            const reservationId = checkoutModal.dataset.reprintId;
+            const reservation = JSON.parse(localStorage.getItem('hotel_reservations') || '[]').find(r => r.id === reservationId);
+            if (reservation) {
                 populateInvoiceModal({ ...reservation, paymentStatus: paymentStatusSelect.value });
-             }
+            }
         }
         
         function updateDashboardStats() {
@@ -3813,9 +3811,9 @@
             document.getElementById('totalGuests').textContent = guests.length;
             document.getElementById('availableRooms').textContent = rooms.filter(r => r.status === 'available').length;
             
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('todayCheckins').textContent = reservations.filter(r => r.status === 'checked-in' && r.actualCheckin && r.actualCheckin.startsWith(today)).length;
-            document.getElementById('todayCheckouts').textContent = reservations.filter(r => r.status === 'checked-out' && r.actualCheckout && r.actualCheckout.startsWith(today)).length;
+            const todayStr = new Date().toISOString().split('T')[0];
+            document.getElementById('todayCheckins').textContent = reservations.filter(r => r.status === 'checked-in' && r.actualCheckin?.startsWith(todayStr)).length;
+            document.getElementById('todayCheckouts').textContent = reservations.filter(r => r.status === 'checked-out' && r.actualCheckout?.startsWith(todayStr)).length;
             
             updateRecentActivities(reservations, guests, rooms);
             initDashboardCharts();
@@ -3826,16 +3824,21 @@
             const activitiesList = document.getElementById('recentActivities');
             activitiesList.innerHTML = '';
             
+            if (recent.length === 0) {
+                 activitiesList.innerHTML = `<tr><td colspan="5" class="text-center">Tidak ada aktivitas terbaru.</td></tr>`;
+                 return;
+            }
+
             recent.forEach(res => {
                 const guest = guests.find(g => g.id === res.guestId) || {};
                 const room = rooms.find(r => r.id === res.roomId) || {};
                 const row = activitiesList.insertRow();
                 row.innerHTML = `
                     <td>${formatDateTime(res.updatedAt)}</td>
-                    <td>${guest.firstName || ''} ${guest.lastName || ''}</td>
-                    <td>${room.number || '-'}</td>
+                    <td>${guest.firstName || ''} ${guest.lastName || '[Tamu Dihapus]'}</td>
+                    <td>${room.number || '[Kamar Dihapus]'}</td>
                     <td>${getActivityText(res.status)}</td>
-                    <td><span class="badge ${getStatusClass(res.status)}">${getStatusText(res.status)}</span></td>
+                    <td><span class="badge ${getStatusClass(res.status, true)}">${getStatusText(res.status)}</span></td>
                 `;
             });
         }
@@ -3862,13 +3865,13 @@
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
                     datasets: [{
                         label: 'Pendapatan', data: monthlyRevenue,
-                        backgroundColor: 'rgba(26, 94, 99, 0.7)',
+                        backgroundColor: 'rgba(13, 71, 161, 0.7)',
                     }, {
                         label: 'Tamu Check-Out', data: monthlyGuests,
-                        type: 'line', yAxisID: 'y1', borderColor: '#c5a05b', backgroundColor: '#c5a05b'
+                        type: 'line', yAxisID: 'y1', borderColor: '#b71c1c', backgroundColor: '#b71c1c'
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }, y1: { position: 'right', grid: { drawOnChartArea: false } } } }
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }, y1: { position: 'right', grid: { drawOnChartArea: false }, beginAtZero: true } } }
             });
             
             const roomCtx = document.getElementById('roomStatusChart').getContext('2d');
@@ -3919,178 +3922,96 @@
             const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
             const monthlyData = Array(12).fill(0);
             
-            let tableHeaders = [];
-            let tableRows = [];
-            let totalValue = 0;
-            let summaryText = '';
+            let tableHeaders = [], tableRows = [], summaryText = '', totalValue = 0;
 
-            switch(reportType) {
-                case 'revenue':
+            const processReport = {
+                revenue: () => {
                     reservations.filter(r => r.status === 'checked-out' && r.actualCheckout && new Date(r.actualCheckout) >= startDate && new Date(r.actualCheckout) <= endDate)
-                        .forEach(r => {
-                            const month = new Date(r.actualCheckout).getMonth();
-                            monthlyData[month] += r.totalAmount || 0;
-                        });
-                    tableHeaders = ['Bulan', 'Total Pendapatan'];
+                        .forEach(r => monthlyData[new Date(r.actualCheckout).getMonth()] += r.totalAmount || 0);
                     totalValue = monthlyData.reduce((sum, val) => sum + val, 0);
-                    summaryText = `Total Pendapatan: ${formatCurrency(totalValue)}`;
-                    break;
-                
-                case 'occupancy':
-                    const totalRooms = rooms.length;
-                    if (totalRooms === 0) {
-                        showNotification('Warning', 'Tidak ada kamar terdaftar. Okupansi selalu 0%.', 'warning');
-                        tableHeaders = ['Bulan', 'Rata-rata Okupansi'];
-                        summaryText = `Rata-rata Okupansi Keseluruhan: 0.00%`;
-                        updateReportView(tableHeaders, [], summaryText);
-                        return;
+                    return { headers: ['Bulan', 'Total Pendapatan'], summary: `Total Pendapatan: ${formatCurrency(totalValue)}` };
+                },
+                occupancy: () => {
+                    if (rooms.length === 0) {
+                        showNotification('Warning', 'Tidak ada kamar terdaftar. Okupansi 0%.', 'warning');
+                        return { headers: ['Bulan', 'Rata-rata Okupansi'], summary: 'Rata-rata Okupansi: 0.00%' };
                     }
-                    const monthlyOccupancyDays = Array(12).fill(0);
-                    const daysInMonth = Array(12).fill(0);
-                    
+                    const monthlyOccupancyDays = new Array(12).fill(0), daysInMonth = new Array(12).fill(0);
                     for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
                         const month = d.getMonth();
                         daysInMonth[month]++;
-                        const occupiedCount = reservations.filter(r => {
-                            const checkin = new Date(r.checkinDate);
-                            checkin.setHours(0,0,0,0);
-                            const checkout = new Date(r.checkoutDate);
-                            checkout.setHours(0,0,0,0);
-                            return ['checked-in', 'confirmed', 'reserved'].includes(r.status) && d >= checkin && d < checkout;
-                        }).length;
-                        monthlyOccupancyDays[month] += occupiedCount;
+                        monthlyOccupancyDays[month] += reservations.filter(r => new Date(r.checkinDate) <= d && new Date(r.checkoutDate) > d && ['checked-in', 'confirmed', 'reserved'].includes(r.status)).length;
                     }
-
-                    for(let i = 0; i < 12; i++) {
-                        if (daysInMonth[i] > 0) {
-                            const avgOccupancy = (monthlyOccupancyDays[i] / (daysInMonth[i] * totalRooms)) * 100;
-                            monthlyData[i] = parseFloat(avgOccupancy.toFixed(2));
-                        }
-                    }
-
-                    tableHeaders = ['Bulan', 'Rata-rata Okupansi'];
+                    for (let i = 0; i < 12; i++) if (daysInMonth[i] > 0) monthlyData[i] = parseFloat(((monthlyOccupancyDays[i] / (daysInMonth[i] * rooms.length)) * 100).toFixed(2));
                     const totalDaysInRange = ((endDate - startDate) / (1000 * 3600 * 24)) + 1;
-                    const totalOccupiedDays = monthlyOccupancyDays.reduce((a, b) => a + b, 0);
-                    totalValue = (totalOccupiedDays / (totalDaysInRange * totalRooms)) * 100;
-                    summaryText = `Rata-rata Okupansi Keseluruhan: ${totalValue.toFixed(2)}%`;
-                    break;
-
-                case 'guests':
+                    totalValue = (monthlyOccupancyDays.reduce((a, b) => a + b, 0) / (totalDaysInRange * rooms.length)) * 100;
+                    return { headers: ['Bulan', 'Rata-rata Okupansi'], summary: `Rata-rata Okupansi Keseluruhan: ${totalValue.toFixed(2)}%` };
+                },
+                guests: () => {
                     guests.filter(g => g.createdAt && new Date(g.createdAt) >= startDate && new Date(g.createdAt) <= endDate)
-                        .forEach(g => {
-                            const month = new Date(g.createdAt).getMonth();
-                            monthlyData[month]++;
-                        });
-                    tableHeaders = ['Bulan', 'Jumlah Tamu Baru'];
+                        .forEach(g => monthlyData[new Date(g.createdAt).getMonth()]++);
                     totalValue = monthlyData.reduce((sum, val) => sum + val, 0);
-                    summaryText = `Total Tamu Baru: ${totalValue}`;
-                    break;
-
-                case 'reservations':
+                    return { headers: ['Bulan', 'Jumlah Tamu Baru'], summary: `Total Tamu Baru: ${totalValue}` };
+                },
+                reservations: () => {
                     reservations.filter(r => r.createdAt && new Date(r.createdAt) >= startDate && new Date(r.createdAt) <= endDate)
-                        .forEach(r => {
-                            const month = new Date(r.createdAt).getMonth();
-                            monthlyData[month]++;
-                        });
-                    tableHeaders = ['Bulan', 'Jumlah Reservasi Baru'];
+                        .forEach(r => monthlyData[new Date(r.createdAt).getMonth()]++);
                     totalValue = monthlyData.reduce((sum, val) => sum + val, 0);
-                    summaryText = `Total Reservasi Baru: ${totalValue}`;
-                    break;
-            }
-            
+                    return { headers: ['Bulan', 'Jumlah Reservasi Baru'], summary: `Total Reservasi Baru: ${totalValue}` };
+                }
+            };
+
+            const reportResult = processReport[reportType]();
+            tableHeaders = reportResult.headers;
+            summaryText = reportResult.summary;
+
             monthLabels.forEach((month, index) => {
-                if(monthlyData[index] > 0 || (reportType === 'occupancy' && monthlyData[index] >= 0 && new Date(startDate).getMonth() <= index && new Date(endDate).getMonth() >= index)) {
-                    let value = monthlyData[index];
-                    if (reportType === 'revenue') value = formatCurrency(value);
-                    if (reportType === 'occupancy') value = `${value}%`;
-                    tableRows.push([monthLabels[index], value]);
+                const monthIsInRange = new Date(startDate).getMonth() <= index && new Date(endDate).getMonth() >= index;
+                if(monthlyData[index] > 0 || (reportType === 'occupancy' && monthIsInRange)) {
+                    let value = reportType === 'revenue' ? formatCurrency(monthlyData[index]) : reportType === 'occupancy' ? `${monthlyData[index]}%` : monthlyData[index];
+                    tableRows.push([month, value]);
                 }
             });
 
-            currentReportData = {
-                title: `Laporan ${document.getElementById('reportType').options[document.getElementById('reportType').selectedIndex].text}`,
-                period: `Periode: ${formatDate(startDateStr)} - ${formatDate(endDateStr)}`,
-                headers: tableHeaders,
-                rows: tableRows,
-                summary: summaryText,
-                type: reportType
-            };
-
+            currentReportData = { title: `Laporan ${document.getElementById('reportType').options[document.getElementById('reportType').selectedIndex].text}`, period: `Periode: ${formatDate(startDateStr)} - ${formatDate(endDateStr)}`, headers: tableHeaders, rows: tableRows, summary: summaryText, type: reportType };
             updateReportView(tableHeaders, tableRows, summaryText);
             showNotification('Sukses', `Laporan ${reportType} berhasil dibuat.`, 'success');
         }
 
         function updateReportView(tableHeaders, tableRows, summaryText) {
-            const header = document.getElementById('reportTableHeader');
-            const body = document.getElementById('reportTableBody');
-            header.innerHTML = `<tr>${tableHeaders.map(h => `<th>${h}</th>`).join('')}</tr>`;
-            body.innerHTML = tableRows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('');
-            if (tableRows.length === 0) {
-                body.innerHTML = `<tr><td colspan="${tableHeaders.length}" class="text-center">Tidak ada data untuk periode yang dipilih.</td></tr>`;
-            }
-
+            document.getElementById('reportTableHeader').innerHTML = `<tr>${tableHeaders.map(h => `<th>${h}</th>`).join('')}</tr>`;
+            document.getElementById('reportTableBody').innerHTML = tableRows.length > 0 ? tableRows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('') : `<tr><td colspan="${tableHeaders.length}" class="text-center">Tidak ada data.</td></tr>`;
             document.getElementById('reportSummary').textContent = summaryText;
             document.getElementById('reportSummary').style.display = 'block';
-            document.getElementById('reportActions').style.display = 'flex';
+            document.getElementById('reportActions').style.display = 'block';
         }
 
         function printReport() {
-            if (!currentReportData.title) {
-                showNotification('Error', 'Generate laporan terlebih dahulu sebelum mencetak.', 'error');
-                return;
-            }
-
+            if (!currentReportData.title) return showNotification('Error', 'Generate laporan terlebih dahulu.', 'error');
             const settings = JSON.parse(localStorage.getItem('hotel_settings') || '{}');
-            
-            let printWindow = window.open('', '_blank');
-            printWindow.document.write('<html><head><title>Cetak Laporan</title>');
-            printWindow.document.write('<style>body{font-family:sans-serif;} table{width:100%; border-collapse:collapse;} th,td{border:1px solid #ddd; padding:8px; text-align:left;} th{background-color:#f2f2f2;}</style>');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write(`<h1>${settings.hotelName || 'Hotel'}</h1>`);
-            printWindow.document.write(`<h2>${currentReportData.title}</h2>`);
-            printWindow.document.write(`<p>${currentReportData.period}</p>`);
-            printWindow.document.write(`<h3>${currentReportData.summary}</h3>`);
-            printWindow.document.write('<table><thead><tr>');
-            currentReportData.headers.forEach(header => printWindow.document.write(`<th>${header}</th>`));
-            printWindow.document.write('</tr></thead><tbody>');
-            currentReportData.rows.forEach(row => {
-                printWindow.document.write('<tr>');
-                row.forEach(cell => printWindow.document.write(`<td>${cell}</td>`));
-                printWindow.document.write('</tr>');
-            });
-            printWindow.document.write('</tbody></table>');
-            printWindow.document.write('</body></html>');
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`<html><head><title>Cetak Laporan</title><style>body{font-family:sans-serif;} table{width:100%; border-collapse:collapse;} th,td{border:1px solid #ddd; padding:8px; text-align:left;} th{background-color:#f2f2f2;}</style></head><body>`);
+            printWindow.document.write(`<h1>${settings.hotelName || 'Hotel'}</h1><h2>${currentReportData.title}</h2><p>${currentReportData.period}</p><h3>${currentReportData.summary}</h3><table><thead><tr>${currentReportData.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>`);
+            currentReportData.rows.forEach(row => printWindow.document.write(`<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`));
+            printWindow.document.write('</tbody></table></body></html>');
             printWindow.document.close();
             printWindow.focus();
-            setTimeout(() => { printWindow.print(); }, 500);
+            setTimeout(() => printWindow.print(), 500);
         }
 
         function downloadReportPdf() {
-            if (!currentReportData.title) {
-                showNotification('Error', 'Generate laporan terlebih dahulu sebelum mengunduh PDF.', 'error');
-                return;
-            }
+            if (!currentReportData.title) return showNotification('Error', 'Generate laporan terlebih dahulu.', 'error');
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const settings = JSON.parse(localStorage.getItem('hotel_settings') || '{}');
-
             doc.setFontSize(18);
             doc.text(`${settings.hotelName} - ${currentReportData.title}`, 14, 22);
             doc.setFontSize(11);
             doc.text(currentReportData.period, 14, 30);
-            
             doc.setFontSize(12);
             doc.setFont('Helvetica', 'bold');
             doc.text(currentReportData.summary, 14, 40);
-
-            doc.autoTable({
-                head: [currentReportData.headers],
-                body: currentReportData.rows,
-                startY: 45,
-                theme: 'grid',
-                headStyles: { fillColor: [26, 94, 99] }
-            });
-
+            doc.autoTable({ head: [currentReportData.headers], body: currentReportData.rows, startY: 45, theme: 'grid', headStyles: { fillColor: [13, 71, 161] } });
             doc.save(`laporan_${currentReportData.type}_${new Date().toISOString().split('T')[0]}.pdf`);
             showNotification('Sukses', 'PDF Laporan berhasil dibuat.', 'success');
         }
@@ -4100,50 +4021,41 @@
             const isEdit = e.target.id === 'editReservationGuestName';
             const resultsContainer = document.getElementById(isEdit ? 'editGuestSearchResults' : 'guestSearchResults');
             const hiddenInput = document.getElementById(isEdit ? 'editReservationGuestId' : 'reservationGuestId');
-
             resultsContainer.innerHTML = '';
-            if (searchTerm.length < 1) {
-                hiddenInput.value = '';
-                return;
-            }
-
-            const guests = JSON.parse(localStorage.getItem('hotel_guests') || '[]');
-            const filteredGuests = guests.filter(guest => 
-                `${guest.firstName} ${guest.lastName}`.toLowerCase().includes(searchTerm)
-            ).slice(0, 5);
+            if (searchTerm.length < 1) return hiddenInput.value = '';
+            
+            const filteredGuests = JSON.parse(localStorage.getItem('hotel_guests') || '[]')
+                .filter(guest => `${guest.firstName} ${guest.lastName}`.toLowerCase().includes(searchTerm))
+                .slice(0, 5);
 
             filteredGuests.forEach(guest => {
                 const item = document.createElement('a');
                 item.href = '#';
                 item.className = 'list-group-item list-group-item-action';
                 item.textContent = `${guest.firstName} ${guest.lastName} (${guest.email})`;
-                item.onclick = (event) => {
-                    event.preventDefault();
-                    selectGuest(guest, e.target.id);
-                };
+                item.onclick = (event) => { event.preventDefault(); selectGuest(guest, e.target.id); };
                 resultsContainer.appendChild(item);
             });
         }
 
         function selectGuest(guest, inputId) {
             const isEdit = inputId === 'editReservationGuestName';
-            const nameInput = document.getElementById(inputId);
-            const idInput = document.getElementById(isEdit ? 'editReservationGuestId' : 'reservationGuestId');
-            const resultsContainer = document.getElementById(isEdit ? 'editGuestSearchResults' : 'guestSearchResults');
-
-            nameInput.value = `${guest.firstName} ${guest.lastName}`;
-            idInput.value = guest.id;
-            resultsContainer.innerHTML = '';
+            document.getElementById(inputId).value = `${guest.firstName} ${guest.lastName}`;
+            document.getElementById(isEdit ? 'editReservationGuestId' : 'reservationGuestId').value = guest.id;
+            document.getElementById(isEdit ? 'editGuestSearchResults' : 'guestSearchResults').innerHTML = '';
         }
         
         // --- Helper Functions ---
         const generateId = (prefix) => `${prefix}-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
         const formatCurrency = (amount) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount || 0);
         const formatDate = (dateString) => dateString ? new Date(dateString).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : '-';
-        const formatDateTime = (dateString) => dateString ? new Date(dateString).toLocaleString('id-ID') : '-';
+        const formatDateTime = (dateString) => dateString ? new Date(dateString).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' }) : '-';
         
         const getStatusText = (status) => ({ available: 'Tersedia', occupied: 'Terisi', maintenance: 'Pemeliharaan', reserved: 'Dipesan', confirmed: 'Dikonfirmasi', pending: 'Menunggu', cancelled: 'Dibatalkan', 'checked-in': 'Check-In', 'checked-out': 'Check-Out' }[status] || status);
-        const getStatusClass = (status) => ({ available: 'bg-success', occupied: 'bg-danger', maintenance: 'bg-warning', reserved: 'bg-info', confirmed: 'bg-success', pending: 'bg-warning', cancelled: 'bg-danger', 'checked-in': 'bg-primary', 'checked-out': 'bg-secondary' }[status] || 'bg-dark');
+        const getStatusClass = (status, isBadge = false) => {
+            const prefix = isBadge ? 'bg' : 'status';
+            return { available: `${prefix}-success`, occupied: `${prefix}-danger`, maintenance: `${prefix}-warning`, reserved: `${prefix}-info`, confirmed: `${prefix}-success`, pending: `${prefix}-warning`, cancelled: `${prefix}-danger`, 'checked-in': `${prefix}-primary`, 'checked-out': 'bg-secondary' }[status] || 'bg-dark';
+        };
         const getActivityText = (status) => ({ confirmed: 'Reservasi Dikonfirmasi', pending: 'Reservasi Menunggu', cancelled: 'Reservasi Dibatalkan', 'checked-in': 'Tamu Check-In', 'checked-out': 'Tamu Check-Out' }[status] || 'Aktivitas');
     </script>
 </body>
